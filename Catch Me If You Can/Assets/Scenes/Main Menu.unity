@@ -2007,8 +2007,8 @@ GameObject:
   - component: {fileID: 6763283436829020824}
   - component: {fileID: 6763283436829020820}
   - component: {fileID: 6763283436829020822}
-  - component: {fileID: 6763283436829020823}
   - component: {fileID: 6763283436829020821}
+  - component: {fileID: 6763283436829020823}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -2211,6 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ad2041b66df734eacf1e9e9cfa1994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _matchTime: 0
 --- !u!135 &6763283436829020824
 SphereCollider:
   m_ObjectHideFlags: 0
