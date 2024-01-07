@@ -6,19 +6,18 @@ public class Item : MonoBehaviour
 {
     public ScriptableItem ScriptableItem;
 
-    private void Awake()
-    {
-        if (ScriptableItem != null)
-        {
-            gameObject.name = ScriptableItem.Name;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player")) return;
+
         if (ScriptableItem != null)
         {
-            ScriptableItem.Use();
+            PlayerBuff playerBuff = other.GetComponent<PlayerBuff>();
+            ScriptableItem.Use(playerBuff, gameObject.GetComponent<Animation>());
+        }
+        else
+        {
+            Debug.LogWarning("No scriptable item assigned to the item");
         }
     }
 }

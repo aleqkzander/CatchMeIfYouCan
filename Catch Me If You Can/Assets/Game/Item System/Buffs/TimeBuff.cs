@@ -5,16 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Time Buff", menuName = "Buffs/Time")]
 public class TimeBuff : ScriptableItem
 {
-    public float Value;
+    public float Time;
     public float Duration;
-    public float Cooldown;
 
     [Space(5)]
     [TextArea(3,3)]
     public string Description;
 
-    public override void Use()
+    public override void Use(PlayerBuff playerBuff, Animation item)
     {
-        throw new System.NotImplementedException();
+        playerBuff.ActivateSpeedBuff(Duration, Time, Duration, item);
     }
 }

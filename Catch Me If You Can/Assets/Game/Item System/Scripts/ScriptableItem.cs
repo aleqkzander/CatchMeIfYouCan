@@ -4,7 +4,5 @@ using UnityEngine;
 
 public abstract class ScriptableItem : ScriptableObject
 {
-    public string Name;
-
-    public abstract void Use();
+    public abstract void Use(PlayerBuff playerBuff, Animation item);
 }

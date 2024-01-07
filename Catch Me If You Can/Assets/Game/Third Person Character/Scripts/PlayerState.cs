@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateColor
@@ -13,11 +12,11 @@ public class PlayerState : MonoBehaviour
 {
     [SerializeField] private Light _stateLight;
     private bool _onCooldown;
-    private bool _caught;
 
     private void Awake()
     {
         _stateLight.color = StateColor.Neutral;
+        SetColor( _stateLight.color );
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,20 +31,14 @@ public class PlayerState : MonoBehaviour
         _onCooldown = false;
     }
 
-    public void SetState(bool state)
+    public void SetCooldown()
     {
-        _caught = state;
+        StartCoroutine(HandleCooldown());
     }
 
-    public void SetColor(bool caught)
+    public void SetColor(Color color)
     {
-        if (caught)
-        {
-            _stateLight.color = StateColor.Seek;
-        }
-        else
-        {
-            _stateLight.color = StateColor.Hide;
-        }
+        _stateLight.color = color;
+        GetComponent<PlayerInterface>().SetStatusColor(color);
     }
 }

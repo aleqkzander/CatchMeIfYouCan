@@ -5,16 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Jump Buff", menuName = "Buffs/Jump")]
 public class JumpBuff : ScriptableItem
 {
-    public float Value;
+    public float Multiplicator;
     public float Duration;
-    public float Cooldown;
 
     [Space(5)]
     [TextArea(3, 3)]
     public string Description;
 
-    public override void Use()
+    public override void Use(PlayerBuff playerBuff, Animation item)
     {
-        throw new System.NotImplementedException();
+        playerBuff.ActivateJumpBuff(Duration, Multiplicator, Duration, item);
     }
 }
