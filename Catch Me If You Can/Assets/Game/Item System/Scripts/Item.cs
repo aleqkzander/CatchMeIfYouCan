@@ -9,15 +9,9 @@ public class Item : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        if (ScriptableItem == null) return;
+        if (other.GetComponent<PlayerBuff>().IsOnCooldown()) return;
 
-        if (ScriptableItem != null)
-        {
-            PlayerBuff playerBuff = other.GetComponent<PlayerBuff>();
-            ScriptableItem.Use(playerBuff, gameObject.GetComponent<Animation>());
-        }
-        else
-        {
-            Debug.LogWarning("No scriptable item assigned to the item");
-        }
+        ScriptableItem.Use(other.GetComponent<PlayerBuff>(), gameObject.GetComponent<Animation>());
     }
 }

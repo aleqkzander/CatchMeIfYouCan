@@ -6,7 +6,12 @@ public class PlayerBuff : MonoBehaviour
 {
     [SerializeField] private ThirdPersonController _thirdPersonController;
     [SerializeField] private Animation _playerModelAnimation; 
-    [HideInInspector] public bool _onCooldown;
+    private bool _onCooldown;
+
+    public bool IsOnCooldown()
+    {
+        return _onCooldown;
+    }
 
     private IEnumerator HandleCooldown(float time)
     {

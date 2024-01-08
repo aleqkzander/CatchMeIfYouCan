@@ -26,12 +26,14 @@ public class TutorialManager : MonoBehaviour
     {
         foreach (var tutorial in TutorialObject)
         {
-            tutorial.SetTutorialSignCanvas(false);
+            tutorial.SetUnactive();
         }
     }
 
     public void ActivateSignForCurrentTutorial()
     {
-       TutorialObject[CurrentTutorial].GetComponent<Tutorial>().SetTutorialSignCanvas(true);
+       TutorialObject[CurrentTutorial].GetComponent<Tutorial>().SetActive();
     }
+
+
 }

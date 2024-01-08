@@ -4,11 +4,24 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject TutorialSignCanvas;
     public GameObject TutorialTextCanvas;
+    public GameObject Player;
     private TutorialManager _tutorialManager;
 
     private void Awake()
     {
         _tutorialManager = FindAnyObjectByType<TutorialManager>();
+    }
+
+    private void Update()
+    {
+        //if (TutorialTextCanvas.activeSelf)
+        //{
+        //    transform.LookAt(
+        //        new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
+        //}
+
+        transform.LookAt(
+            new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,6 +33,7 @@ public class Tutorial : MonoBehaviour
 
         TutorialTextCanvas.SetActive(true);
         GetComponentInChildren<TextPrinter>().Print();
+        GetComponentInChildren<Animation>().Play($"Talking");
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,10 +46,18 @@ public class Tutorial : MonoBehaviour
         }
 
         TutorialTextCanvas.SetActive(false);
+        SetUnactive();
     }
 
-    public void SetTutorialSignCanvas(bool state)
+    public void SetActive()
     {
-        TutorialSignCanvas.SetActive(state);
+        TutorialSignCanvas.SetActive(true);
+        GetComponentInChildren<Animation>().Play($"Waving");
+    }
+
+    public void SetUnactive()
+    {
+        TutorialSignCanvas.SetActive(false);
+        GetComponentInChildren<Animation>().Play($"{gameObject.name} Idle");
     }
 }
