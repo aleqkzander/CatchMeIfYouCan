@@ -14,12 +14,6 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        //if (TutorialTextCanvas.activeSelf)
-        //{
-        //    transform.LookAt(
-        //        new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
-        //}
-
         transform.LookAt(
             new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
     }
