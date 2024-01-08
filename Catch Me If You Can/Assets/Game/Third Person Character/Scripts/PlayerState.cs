@@ -1,17 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class StateColor
-{
-    public static Color Neutral = new(0.6078432f, 0.3490196f, 0.7137255f);
-    public static Color Hide = new(0.1803922f, 0.8f, 0.4431373f);
-    public static Color Seek = new(0.9058824f, 0.2980392f, 0.2352941f);
-}
-
 public class PlayerState : MonoBehaviour
 {
     [SerializeField] private Light _stateLight;
     private bool _onCooldown;
+    private bool _isCaught;
+
 
     private void Awake()
     {
@@ -19,9 +14,26 @@ public class PlayerState : MonoBehaviour
         SetColor( _stateLight.color );
     }
 
-    private void OnTriggerEnter(Collider other)
+    public bool IsOnCooldown()
     {
-        if (_onCooldown) return;
+        return _onCooldown;
+    }
+
+    public bool IsCaught()
+    {
+        return _isCaught;
+    }
+
+    public void SetState(bool state)
+    {
+        _isCaught = state;
+        SetCooldown();
+        HandleColor( state );
+    }
+
+    private void SetCooldown()
+    {
+        StartCoroutine(HandleCooldown());
     }
 
     private IEnumerator HandleCooldown()
@@ -31,12 +43,20 @@ public class PlayerState : MonoBehaviour
         _onCooldown = false;
     }
 
-    public void SetCooldown()
+    private void HandleColor(bool state)
     {
-        StartCoroutine(HandleCooldown());
+        switch (state)
+        {
+            case false:
+                SetColor(StateColor.Hide);
+                break;
+            case true:
+                SetColor(StateColor.Seek);
+                break;
+        }
     }
 
-    public void SetColor(Color color)
+    private void SetColor(Color color)
     {
         _stateLight.color = color;
         GetComponent<PlayerInterface>().SetStatusColor(color);

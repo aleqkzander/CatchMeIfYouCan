@@ -11,11 +11,19 @@ public class PlayerInterface : MonoBehaviour
     [SerializeField] private TMP_Text _playerName;
     [SerializeField] private TMP_Text _playerTime;
 
+    /// <summary>
+    /// Method will be called by PlayerState.cs
+    /// </summary>
+    /// <param name="color"></param>
     public void SetStatusColor(Color color)
     {
         _statusImage.color = color;
     }
 
+    /// <summary>
+    /// Method will be called by PlayerBuff.cs
+    /// </summary>
+    /// <param name="color"></param>
     public void SetFaceColor(Color color)
     {
         _faceImage.color = color;
@@ -25,6 +33,7 @@ public class PlayerInterface : MonoBehaviour
     {
         _playerName.text = name;
     }
+
 
     public void SetPlayerTime(float time)
     {
