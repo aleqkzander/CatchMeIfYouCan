@@ -25,13 +25,6 @@ public class Tutorial : MonoBehaviour
             _tutorialManager.CurrentTutorial++;
         }
 
-        TutorialTextCanvas.SetActive(true);
-        GetComponentInChildren<TextPrinter>().Print();
-        GetComponentInChildren<Animation>().Play($"Talking");
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
         _tutorialManager.RemoveAllSigns();
 
         if (_tutorialManager.CurrentTutorial < _tutorialManager.TutorialObject.Count)
@@ -39,16 +32,35 @@ public class Tutorial : MonoBehaviour
             _tutorialManager.ActivateSignForCurrentTutorial();
         }
 
-        TutorialTextCanvas.SetActive(false);
-        SetUnactive();
+        PlayerTalk();
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        TutorialTextCanvas.SetActive(false);
+        GetComponentInChildren<Animation>().Play($"{gameObject.name} Idle");
+    }
+
+    private  void PlayerTalk()
+    {
+        TutorialSignCanvas.SetActive(false);
+        TutorialTextCanvas.SetActive(true);
+        GetComponentInChildren<TextPrinter>().Print();
+        GetComponentInChildren<Animation>().Play($"Talking");
+    }
+
+    /// <summary>
+    /// Use on tutorial manager
+    /// </summary>
     public void SetActive()
     {
         TutorialSignCanvas.SetActive(true);
         GetComponentInChildren<Animation>().Play($"Waving");
     }
 
+    /// <summary>
+    /// Use on tutorial manager
+    /// </summary>
     public void SetUnactive()
     {
         TutorialSignCanvas.SetActive(false);

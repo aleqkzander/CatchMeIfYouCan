@@ -6,16 +6,6 @@ public class TutorialManager : MonoBehaviour
     public List<Tutorial> TutorialObject;
     public int CurrentTutorial;
 
-    private void Awake()
-    {
-        Tutorial[] tutorialObjects = FindObjectsOfType<Tutorial>();
-        foreach (var tutorial in tutorialObjects)
-        {
-            TutorialObject.Add(tutorial);
-        }
-        TutorialObject.Reverse();
-    }
-
     private void Start()
     {
         RemoveAllSigns();
@@ -34,6 +24,4 @@ public class TutorialManager : MonoBehaviour
     {
        TutorialObject[CurrentTutorial].GetComponent<Tutorial>().SetActive();
     }
-
-
 }

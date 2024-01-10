@@ -7315,17 +7315,17 @@ MonoBehaviour:
   m_text: 'Explore the four item types located behind me to enhance your skills and
     ascend to champion status.
 
-    
+
 
     - Sneakers: Gives a speed boost.
 
-    -
-    Wings: Provide a jump boost.
+    - Wings:
+    Provide a jump boost.
 
     - Potion: Makes you invisible.
 
-    - Clock:
-    Grants a time boost.'
+    - Clock: Grants
+    a time boost.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10606,7 +10606,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b149dce15098d47a7f615270348984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TutorialObject: []
+  TutorialObject:
+  - {fileID: 919132147713600925}
+  - {fileID: 694189920}
+  - {fileID: 289046251}
+  - {fileID: 761091323}
+  - {fileID: 1350823088}
   CurrentTutorial: 0
 --- !u!1 &1757053154
 GameObject:
@@ -13497,6 +13502,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &3146641244309563945
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220858837294553545, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8491689572737352739, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
+      propertyPath: m_Name
+      value: Main Menu Cube
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 471a93da0fdd1cf4ca5925f50e4701b7, type: 3}
 --- !u!4 &3232832893221911226
 Transform:
   m_ObjectHideFlags: 0
@@ -14907,3 +14969,4 @@ SceneRoots:
   - {fileID: 202309368}
   - {fileID: 2087348831}
   - {fileID: 524798518}
+  - {fileID: 3146641244309563945}
