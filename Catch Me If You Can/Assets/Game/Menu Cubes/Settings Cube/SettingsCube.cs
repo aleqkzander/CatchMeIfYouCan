@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SettingsCube : MonoBehaviour
@@ -10,21 +7,57 @@ public class SettingsCube : MonoBehaviour
 
     private void Start()
     {
-        //NicknameEntry.text = Savegame.Instance.Meta.Name;
+        SetNameFromSavegame();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OpenCube();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+    }
+
+    private void OpenCube()
+    {
+        GetComponent<Animation>().Play("CubeShow");
+        DataManager.Instance.Mouse.Enable();
+        DataManager.Instance.Movement.Enabled = false;
+    }
+
+    private void CloseCube()
+    {
+        GetComponent<Animation>().Play("CubeHide");
+        DataManager.Instance.Mouse.Disable();
+        DataManager.Instance.Movement.Enabled = true;
+    }
+
+    private void SetNameFromSavegame()
+    {
+        string savedName = DataManager.Instance.User.Name;
+
+        if (string.IsNullOrEmpty(savedName))
+        {
+            NicknameEntry.text = "Unnamed";
+        }
+        else
+        {
+            NicknameEntry.text = DataManager.Instance.User.Name;
+        }
     }
 
     public void Cube_SetNickname()
     {
         if (string.IsNullOrEmpty(NicknameEntry.text)) return;
-        //Savegame.Instance.Meta.Name = NicknameEntry.text;
-        //NicknameEntry.text = Savegame.Instance.Meta.Name;
-        //Savegame.Instance.SaveGame();
+        DataManager.Instance.User.Name = NicknameEntry.text;
+        DataManager.Instance.SaveGame();
     }
 
     public void Cube_ResetSavegame()
     {
         PlayerPrefs.DeleteAll();
-        Debug.Log("Savegame deleted exit game");
+        Debug.Log("Savegame deleted. Exit game");
         Application.Quit();
     }
 }

@@ -1,39 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayCube : MonoBehaviour
 {
-    public Image previewImage;
-    public TMP_Text previewText;
-    public TMP_InputField ipInput;
+    public Image ScenePreview;
+    public TMP_Text SceneName;
+    public TMP_InputField IpInput;
 
     private void Start()
     {
-        //previewText.text = DataContainer.Instance.AvaibleScenes[0].Name;
-        //previewImage.sprite = DataContainer.Instance.AvaibleScenes[0].Preview;
-        //ipInput.text = Savegame.Instance.Meta.LastIp;
-        AssignNetworkManagerValues();
+        LoadTheLastIp();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OpenCube();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        CloseCube();
+    }
+
+    private void OpenCube()
+    {
+        GetComponent<Animation>().Play("CubeShow");
+        DataManager.Instance.Mouse.Enable();
+    }
+
+    private void CloseCube()
+    {
+        GetComponent<Animation>().Play("CubeHide");
+        DataManager.Instance.Mouse.Disable();
+    }
+
+    private void LoadTheLastIp()
+    {
+        string savedIP = DataManager.Instance.User.LastIp;
+
+        if (string.IsNullOrEmpty(savedIP))
+        {
+            IpInput.text = "127.0.0.1";
+        }
+        else
+        {
+            IpInput.text = savedIP;
+        }
     }
 
     public void Cube_StartHost()
     {
-        //NetworkManager.singleton.StartHost();
+        // For debugging
+        SceneManager.LoadScene(2);
     }
 
     public void Cube_StartClient()
     {
-        if (string.IsNullOrEmpty(ipInput.text)) return;
-        //Savegame.Instance.Meta.LastIp = ipInput.text;
-        //Savegame.Instance.SaveGame();
-        //NetworkManager.singleton.networkAddress = Savegame.Instance.Meta.LastIp;
-        //NetworkManager.singleton.StartClient();
-    }
-
-    private void AssignNetworkManagerValues()
-    {
-        //NetworkManager.singleton.onlineScene = DataContainer.Instance.AvaibleScenes[0].Name;
+        if (string.IsNullOrEmpty(IpInput.text)) return;
     }
 }

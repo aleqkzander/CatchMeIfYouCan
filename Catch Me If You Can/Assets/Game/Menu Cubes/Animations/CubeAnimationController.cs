@@ -16,17 +16,20 @@ public class CubeAnimationController : MonoBehaviour
         OpenCube();
     }
 
-    public void OpenCube()
+    private void OnTriggerExit(Collider other)
     {
-        //Savegame.Instance.Movement.isDisabled = true;
-        //Savegame.Instance.Mouse.Show();
-        _animation.Play("OpenCube");
+        CloseCube();
     }
 
-    public void CloseCube()
+    private void OpenCube()
     {
-        //Savegame.Instance.Movement.isDisabled = false;
-        //Savegame.Instance.Mouse.Hide();
-        _animation.Play("CloseCube");
+        _animation.Play("CubeShow");
+        DataManager.Instance.Mouse.Enable();
+    }
+
+    private void CloseCube()
+    {
+        _animation.Play("CubeHide");
+        DataManager.Instance.Mouse.Disable();
     }
 }
