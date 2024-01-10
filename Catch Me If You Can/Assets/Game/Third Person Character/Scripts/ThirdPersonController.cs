@@ -104,8 +104,6 @@ namespace StarterAssets
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
 
-            Cursor.lockState = CursorLockMode.Locked;
-
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -114,10 +112,18 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            DataManager.Instance.Mouse.Disable();
         }
 
         private void Update()
         {
+            if (DataManager.Instance.Movement.Enabled == false)
+            {
+                _animator.SetFloat("Speed", 0);
+                return;
+            }
+
             _hasAnimator = TryGetComponent(out _animator);
             JumpAndGravity();
             GroundedCheck();
@@ -126,6 +132,8 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+            if (DataManager.Instance.Movement.Enabled == false) return;
+
             CameraRotation();
         }
 

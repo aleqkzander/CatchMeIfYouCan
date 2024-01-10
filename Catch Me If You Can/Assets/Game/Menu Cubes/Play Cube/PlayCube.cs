@@ -14,28 +14,6 @@ public class PlayCube : MonoBehaviour
         LoadTheLastIp();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        OpenCube();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        CloseCube();
-    }
-
-    private void OpenCube()
-    {
-        GetComponent<Animation>().Play("CubeShow");
-        DataManager.Instance.Mouse.Enable();
-    }
-
-    private void CloseCube()
-    {
-        GetComponent<Animation>().Play("CubeHide");
-        DataManager.Instance.Mouse.Disable();
-    }
-
     private void LoadTheLastIp()
     {
         string savedIP = DataManager.Instance.User.LastIp;
@@ -48,6 +26,23 @@ public class PlayCube : MonoBehaviour
         {
             IpInput.text = savedIP;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OpenCube();
+    }
+
+    private void OpenCube()
+    {
+        GetComponent<Animation>().Play("CubeShow");
+        GetComponent<InterfaceController>().EnableMouse();
+    }
+
+    public void Cube_CloseCube()
+    {
+        GetComponent<Animation>().Play("CubeHide");
+        GetComponent<InterfaceController>().DisableMouse();
     }
 
     public void Cube_StartHost()

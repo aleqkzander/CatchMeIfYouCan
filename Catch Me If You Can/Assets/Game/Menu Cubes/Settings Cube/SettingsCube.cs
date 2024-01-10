@@ -10,29 +10,6 @@ public class SettingsCube : MonoBehaviour
         SetNameFromSavegame();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        OpenCube();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-    }
-
-    private void OpenCube()
-    {
-        GetComponent<Animation>().Play("CubeShow");
-        DataManager.Instance.Mouse.Enable();
-        DataManager.Instance.Movement.Enabled = false;
-    }
-
-    private void CloseCube()
-    {
-        GetComponent<Animation>().Play("CubeHide");
-        DataManager.Instance.Mouse.Disable();
-        DataManager.Instance.Movement.Enabled = true;
-    }
-
     private void SetNameFromSavegame()
     {
         string savedName = DataManager.Instance.User.Name;
@@ -45,6 +22,23 @@ public class SettingsCube : MonoBehaviour
         {
             NicknameEntry.text = DataManager.Instance.User.Name;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        OpenCube();
+    }
+
+    private void OpenCube()
+    {
+        GetComponent<Animation>().Play("CubeShow");
+        GetComponent<InterfaceController>().EnableMouse();
+    }
+
+    public void Cube_CloseCube()
+    {
+        GetComponent<Animation>().Play("CubeHide");
+        GetComponent<InterfaceController>().DisableMouse();
     }
 
     public void Cube_SetNickname()

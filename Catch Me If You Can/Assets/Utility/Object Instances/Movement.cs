@@ -1,5 +1,5 @@
 [System.Serializable]
 public class Movement
 {
-    public bool Enabled;
+    public bool Enabled = true;
 }
