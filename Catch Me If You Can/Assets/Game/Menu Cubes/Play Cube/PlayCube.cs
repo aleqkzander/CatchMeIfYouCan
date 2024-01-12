@@ -11,38 +11,7 @@ public class PlayCube : MonoBehaviour
 
     private void Start()
     {
-        LoadTheLastIp();
-    }
-
-    private void LoadTheLastIp()
-    {
-        string savedIP = DataManager.Instance.User.LastIp;
-
-        if (string.IsNullOrEmpty(savedIP))
-        {
-            IpInput.text = "127.0.0.1";
-        }
-        else
-        {
-            IpInput.text = savedIP;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        OpenCube();
-    }
-
-    private void OpenCube()
-    {
-        GetComponent<Animation>().Play("CubeShow");
-        GetComponent<InterfaceController>().EnableMouse();
-    }
-
-    public void Cube_CloseCube()
-    {
-        GetComponent<Animation>().Play("CubeHide");
-        GetComponent<InterfaceController>().DisableMouse();
+        IpInput.text = DataManager.Instance.User.LastIp;
     }
 
     public void Cube_StartHost()

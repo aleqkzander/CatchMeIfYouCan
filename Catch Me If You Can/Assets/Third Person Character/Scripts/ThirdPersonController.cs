@@ -89,7 +89,6 @@ namespace StarterAssets
 
         private Animator _animator;
         private CharacterController _controller;
-        private GameObject _mainCamera;
 
         //private const float _threshold = 0.01f;
         private const float _threshold = 0.05f;
@@ -98,12 +97,6 @@ namespace StarterAssets
 
         private void Start()
         {
-            // get a reference to our main camera
-            if (_mainCamera == null)
-            {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            }
-
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -113,12 +106,12 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
-            DataManager.Instance.Mouse.Disable();
+            DataManager.Instance.Movement.Enable();
         }
 
         private void Update()
         {
-            if (DataManager.Instance.Movement.Enabled == false)
+            if (DataManager.Instance.Movement.IsEnabled == false)
             {
                 _animator.SetFloat("Speed", 0);
                 return;
@@ -132,7 +125,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            if (DataManager.Instance.Movement.Enabled == false) return;
+            if (DataManager.Instance.Movement.IsEnabled == false) return;
 
             CameraRotation();
         }
@@ -219,7 +212,7 @@ namespace StarterAssets
             if (move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
+                                  Camera.main.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
 

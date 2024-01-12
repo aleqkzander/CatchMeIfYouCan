@@ -18,18 +18,18 @@ public class CubeAnimationController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        CloseCube();
+        // Closing the cube Will be trigger by a button new
     }
 
     private void OpenCube()
     {
         _animation.Play("CubeShow");
-        DataManager.Instance.Mouse.Enable();
+        DataManager.Instance.Movement.Disable();
     }
 
-    private void CloseCube()
+    public void CloseCube()
     {
         _animation.Play("CubeHide");
-        DataManager.Instance.Mouse.Disable();
+        DataManager.Instance.Movement.Enable();
     }
 }

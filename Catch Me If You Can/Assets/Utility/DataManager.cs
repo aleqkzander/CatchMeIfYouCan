@@ -8,7 +8,6 @@ public class DataManager : MonoBehaviour
     public User User;
     public List<Level> Levels;
     public Movement Movement;
-    public Mouse Mouse;
 
     private void Awake() 
     {

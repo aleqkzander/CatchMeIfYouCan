@@ -5,7 +5,7 @@
 [System.Serializable]
 public class User
 {
-    public string Name;
-    public int Model;
-    public string LastIp;
+    public string Name = "Unnamed";
+    public int Model = 0;
+    public string LastIp = "127.0.0.1"; 
 }

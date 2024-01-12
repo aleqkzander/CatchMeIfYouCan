@@ -1,28 +1,41 @@
+/*
+ * The tutorial match is simulating the server functionality
+ */
+
 using UnityEngine;
 
 public class TutorialMatch : MonoBehaviour
 {
-    public PlayerState Player;
+    private PlayerState _playerState;
     private float _playerTimer = 60f;
+
+    private void Awake()
+    {
+        _playerState = FindAnyObjectByType<PlayerState>();
+    }
 
     private void Update()
     {
-        if (Player.IsCaught() && _playerTimer > 0)
+        if (_playerState.IsCaught() && _playerTimer > 0)
         {
             _playerTimer -= Time.deltaTime;
         }
 
-        Player.GetComponent<PlayerInterface>().SetPlayerTime(_playerTimer);
+        _playerState.GetComponent<PlayerInterface>().SetPlayerTime(_playerTimer);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Player.IsOnCooldown()) return;
+        if (_playerState.IsOnCooldown()) return;
 
-        if (Player.IsCaught() == true) 
-            Player.SetState(false);
 
-        else if (Player.IsCaught() == false)
-            Player.SetState(true);
+        if (_playerState.IsCaught())
+        {
+            _playerState.SetState(false);
+        }
+        else 
+        { 
+            _playerState.SetState(true); 
+        }
     }
 }

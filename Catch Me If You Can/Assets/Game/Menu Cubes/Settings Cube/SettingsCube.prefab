@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 4620973517007977482}
   - component: {fileID: 8426436929979687943}
   - component: {fileID: 6502211406264075955}
-  - component: {fileID: 3137579343124454234}
+  - component: {fileID: 7567659374533124709}
   m_Layer: 0
   m_Name: SettingsCube
   m_TagString: Untagged
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NicknameEntry: {fileID: 7865555807877676910}
---- !u!114 &3137579343124454234
+--- !u!114 &7567659374533124709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1811195633422957087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa5c6de6031917148a0c8f9a96fb08c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a1658803db946647ad77d80991fe043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4660027475612379640
@@ -1257,9 +1257,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6502211406264075955}
-        m_TargetAssemblyTypeName: SettingsCube, Assembly-CSharp
-        m_MethodName: Cube_CloseCube
+      - m_Target: {fileID: 7567659374533124709}
+        m_TargetAssemblyTypeName: CubeAnimationController, Assembly-CSharp
+        m_MethodName: CloseCube
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
