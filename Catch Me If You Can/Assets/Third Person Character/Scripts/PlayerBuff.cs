@@ -1,11 +1,16 @@
 using StarterAssets;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBuff : MonoBehaviour
 {
     [SerializeField] private ThirdPersonController _thirdPersonController;
-    [SerializeField] private Animation _playerModelAnimation; 
+
+    [Header("Ability Display")]
+    [SerializeField] private GameObject _playerModelShrink;
+    [SerializeField] private List<GameObject> _speedBoostShoes;
+    [SerializeField] private GameObject _angelWings;
     private bool _onCooldown;
 
     public bool IsOnCooldown()
@@ -35,9 +40,22 @@ public class PlayerBuff : MonoBehaviour
         float buffSpeed = defaultSpeed * multiplicator;
         _thirdPersonController.MoveSpeed = buffSpeed;
 
+        foreach (var shoe in _speedBoostShoes)
+        {
+            shoe.GetComponent<Animation>().Play("ShoeGrow");
+            shoe.GetComponent<TrailRenderer>().enabled = true;
+        }
+
         yield return new WaitForSecondsRealtime(abilityTime);
 
         _thirdPersonController.MoveSpeed = defaultSpeed;
+
+        foreach (var shoe in _speedBoostShoes)
+        {
+            shoe.GetComponent<Animation>().Play("ShoeShrink");
+            shoe.GetComponent<TrailRenderer>().enabled = false;
+        }
+
         animation.Play("ItemGrow");
     }
 
@@ -51,11 +69,11 @@ public class PlayerBuff : MonoBehaviour
         StartCoroutine(HandleCooldown(cooldown));
 
         animation.Play("ItemShrink");
-        _playerModelAnimation.Play("PlayerShrink");
+        _playerModelShrink.GetComponent<Animation>().Play("PlayerShrink");
 
         yield return new WaitForSecondsRealtime(abilityTime);
 
-        _playerModelAnimation.Play("PlayerGrow");
+        _playerModelShrink.GetComponent<Animation>().Play("PlayerGrow");
         animation.Play("ItemGrow");
     }
 
@@ -72,10 +90,12 @@ public class PlayerBuff : MonoBehaviour
         float defaultJump = _thirdPersonController.JumpHeight;
         float buffJump = defaultJump * multiplicator;
         _thirdPersonController.JumpHeight = buffJump;
+        _angelWings.GetComponent<Animation>().Play("WingsGrow");
 
-        yield return new WaitForSecondsRealtime(abilityTime);
+                yield return new WaitForSecondsRealtime(abilityTime);
 
         _thirdPersonController.JumpHeight = defaultJump;
+        _angelWings.GetComponent<Animation>().Play("WingsShrink");
         animation.Play("ItemGrow");
     }
 

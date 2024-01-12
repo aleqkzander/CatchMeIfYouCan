@@ -6,11 +6,19 @@ using UnityEngine;
 
 public class PlayerNetworkActivator : MonoBehaviour
 {
-    public GameObject Cameras;
+    [SerializeField] private GameObject _playerCameras;
+    [SerializeField] private GameObject _playerInterface;
 
     private void Start()
     {
         // make local player check
-        Cameras.SetActive(true);
+        _playerCameras.SetActive(true);
+        _playerInterface.SetActive(true);
+        AddPlayerStateToNetworkMatch();
+    }
+
+    private void AddPlayerStateToNetworkMatch()
+    {
+
     }
 }
