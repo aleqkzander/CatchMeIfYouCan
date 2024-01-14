@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class TutorialMatch : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TutorialMatch : MonoBehaviour
 
     private void Update()
     {
+        PlayerState.GetComponent<PlayerInterface>().SetPlayerTime(_playerTimer);
+
         if (PlayerState.IsCaught() && _playerTimer > 0)
         {
             _playerTimer -= Time.deltaTime;
@@ -25,10 +28,12 @@ public class TutorialMatch : MonoBehaviour
         if (PlayerState.IsCaught())
         {
             PlayerState.SetState(false);
+            StartCoroutine(PlayerState.HandleCooldown());
         }
         else 
         {
-            PlayerState.SetState(true); 
+            PlayerState.SetState(true);
+            StartCoroutine(PlayerState.HandleCooldown());
         }
     }
 }

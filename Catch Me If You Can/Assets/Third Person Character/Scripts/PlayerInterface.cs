@@ -1,6 +1,7 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerInterface : NetworkBehaviour
@@ -40,15 +41,22 @@ public class PlayerInterface : NetworkBehaviour
     /// <param name="time"></param>
     public void SetPlayerTime(float time)
     {
-        if (isServer)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            SetPlayerTimeClientRpc(time);
+            _playerTime.text = $"{time:00} seconds";
         }
         else
         {
-            if (isOwned)
+            if (isServer)
             {
-                SetPlayerTimeCommand(time);
+                SetPlayerTimeClientRpc(time);
+            }
+            else
+            {
+                if (isOwned)
+                {
+                    SetPlayerTimeCommand(time);
+                }
             }
         }
     }
@@ -59,15 +67,22 @@ public class PlayerInterface : NetworkBehaviour
     /// <param name="color"></param>
     public void SetFaceColor(Color color)
     {
-        if (isServer)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            SetFaceColorClientRpc(color);
+            _faceImage.color = color;
         }
         else
         {
-            if (isOwned)
+            if (isServer)
             {
-                SetFaceColorCommand(color);
+                SetFaceColorClientRpc(color);
+            }
+            else
+            {
+                if (isOwned)
+                {
+                    SetFaceColorCommand(color);
+                }
             }
         }
     }

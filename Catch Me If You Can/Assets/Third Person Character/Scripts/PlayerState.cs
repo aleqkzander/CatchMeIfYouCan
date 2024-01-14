@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerState : NetworkBehaviour
 {
@@ -38,15 +39,33 @@ public class PlayerState : NetworkBehaviour
     /// <param name="state"></param>
     private void ChangeColors(bool state)
     {
-        if (isServer)
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            ChangeColorsClientRpc(state);
+            switch (state)
+            {
+                case false:
+                    StateColor.Set(_stateLight, _playerInterface, StateColor.Hide);
+                    break;
+
+                case true:
+                    StateColor.Set(_stateLight, _playerInterface, StateColor.Seek);
+                    break;
+            }
+
+            return;
         }
         else
         {
-            if (isOwned)
+            if (isServer)
             {
-                ChangeColorsCommand(state);
+                ChangeColorsClientRpc(state);
+            }
+            else
+            {
+                if (isOwned)
+                {
+                    ChangeColorsCommand(state);
+                }
             }
         }
     }
