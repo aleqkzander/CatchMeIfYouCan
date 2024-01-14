@@ -9,7 +9,10 @@ public class PlayerMatchEnd : NetworkBehaviour
 
     private void Start()
     {
-        BackToCageBtn.SetActive(true);
+        if (isServer)
+        {
+            BackToCageBtn.SetActive(true);
+        }
     }
 
     public void SetWinnerText(string playername)

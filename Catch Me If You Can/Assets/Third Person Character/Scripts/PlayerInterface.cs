@@ -28,6 +28,15 @@ public class PlayerInterface : NetworkBehaviour
     }
 
     /// <summary>
+    /// Use method to get the playername
+    /// </summary>
+    /// <returns></returns>
+    public string GetPlayerName()
+    {
+        return _playerName.text;
+    }
+
+    /// <summary>
     /// Method will be called and replicated by PlayerState.cs
     /// </summary>
     /// <param name="color"></param>
@@ -91,30 +100,30 @@ public class PlayerInterface : NetworkBehaviour
     /// <summary>
     /// Method will be called by NetworkMatchState.cs
     /// </summary>
-    public void ActivateMatchEnd()
+    public void ActivateMatchEnd(string winnerName)
     {
         if (isServer)
         {
-            ActivateMatchEndClientRpc();
+            ActivateMatchEndClientRpc(winnerName);
         }
         else
         {
-            ActivateMatchEndCommand();
+            ActivateMatchEndCommand(winnerName);
         }
     }
 
     [Command]
-    private void ActivateMatchEndCommand()
+    private void ActivateMatchEndCommand(string winnerName)
     {
-        ActivateMatchEndClientRpc();
+        ActivateMatchEndClientRpc(winnerName);
     }
 
     [ClientRpc]
-    private void ActivateMatchEndClientRpc()
+    private void ActivateMatchEndClientRpc(string winnerName)
     {
         DataManager.Instance.Movement.Disable();
         _matchEnd.SetActive(true);
-        _matchEnd.GetComponent<PlayerMatchEnd>().SetWinnerText(_playerName.text);
+        _matchEnd.GetComponent<PlayerMatchEnd>().SetWinnerText(winnerName);
     }
 
     [Command]

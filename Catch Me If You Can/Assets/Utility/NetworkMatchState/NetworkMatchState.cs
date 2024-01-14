@@ -11,6 +11,7 @@ public class NetworkMatchState : NetworkBehaviour
     [SerializeField] private List<PlayerState> _playerStates;
     [SerializeField] private bool _matchIsLife;
     private float _defaultMatchTime = 15f;
+    private string _winnerPlayer;
 
     [SerializeField] private float _playerOneTime;
     [SerializeField] private float _playerTwoTime;
@@ -65,15 +66,26 @@ public class NetworkMatchState : NetworkBehaviour
     {
         if (isServer)
         {
-            if (_playerOneTime <= 0 || _playerTwoTime <= 0)
+            if (_playerOneTime <= 0 && _matchIsLife)
             {
                 _matchIsLife = false;
-
-                foreach (var player in _playerStates)
-                {
-                    player.GetComponent<PlayerInterface>().ActivateMatchEnd();
-                }
+                _winnerPlayer = _playerStates[1].GetComponent<PlayerInterface>().GetPlayerName();
+                DisplayMatchEndUI();
             }
+            if (_playerTwoTime <= 0 && _matchIsLife)
+            {
+                _matchIsLife = false;
+                _winnerPlayer = _playerStates[0].GetComponent<PlayerInterface>().GetPlayerName();
+                DisplayMatchEndUI();
+            }
+        }
+    }
+
+    private void DisplayMatchEndUI()
+    {
+        foreach (var player in _playerStates)
+        {
+            player.GetComponent<PlayerInterface>().ActivateMatchEnd(_winnerPlayer);
         }
     }
 
