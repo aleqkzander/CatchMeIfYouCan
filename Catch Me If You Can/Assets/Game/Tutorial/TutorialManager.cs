@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+    public GameObject PlayerActivator;
     public List<Tutorial> TutorialObject;
     public int CurrentTutorial;
 
     private void Start()
     {
+        PlayerActivator.SetActive(true);
         RemoveAllSigns();
         ActivateSignForCurrentTutorial();
     }

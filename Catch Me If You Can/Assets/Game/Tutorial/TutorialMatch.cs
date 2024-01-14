@@ -3,39 +3,37 @@
  */
 
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class TutorialMatch : MonoBehaviour
 {
-    private PlayerState _playerState;
+    public PlayerState PlayerState;
     private float _playerTimer = 60f;
-
-    private void Awake()
-    {
-        _playerState = FindAnyObjectByType<PlayerState>();
-    }
 
     private void Update()
     {
-        if (_playerState.IsCaught() && _playerTimer > 0)
+        PlayerState.GetComponent<PlayerInterface>().SetPlayerTime(_playerTimer);
+
+        if (PlayerState.IsCaught() && _playerTimer > 0)
         {
             _playerTimer -= Time.deltaTime;
         }
-
-        _playerState.GetComponent<PlayerInterface>().SetPlayerTime(_playerTimer);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_playerState.IsOnCooldown()) return;
+        if (PlayerState.OnCooldown()) return;
 
 
-        if (_playerState.IsCaught())
+        if (PlayerState.IsCaught())
         {
-            _playerState.SetState(false);
+            PlayerState.SetState(false);
+            StartCoroutine(PlayerState.HandleCooldown());
         }
         else 
-        { 
-            _playerState.SetState(true); 
+        {
+            PlayerState.SetState(true);
+            StartCoroutine(PlayerState.HandleCooldown());
         }
     }
 }

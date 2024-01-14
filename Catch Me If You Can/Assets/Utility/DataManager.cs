@@ -6,6 +6,7 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance { get; private set; }
 
     public User User;
+    public Level CurrentLevel;
     public List<Level> Levels;
     public Movement Movement;
 
