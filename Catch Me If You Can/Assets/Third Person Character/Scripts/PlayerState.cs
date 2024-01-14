@@ -25,9 +25,9 @@ public class PlayerState : NetworkBehaviour
         if (!other.CompareTag("Player") || _onCooldown)
             return;
 
-        // Keep the is server check here to prevent any calls to the NetworkMatchState when not the client
         if (isServer)
         {
+            // Keep the is server check here to prevent any calls to the NetworkMatchState when not the client
             FindAnyObjectByType<NetworkMatchState>().ServerChangeStates();
         }
     }
@@ -73,7 +73,7 @@ public class PlayerState : NetworkBehaviour
     }
 
     /// <summary>
-    /// Call this to set the player state
+    /// Should only be called by NetworkMatchState.cs
     /// </summary>
     /// <param name="state"></param>
     public void SetState(bool state)
@@ -91,6 +91,10 @@ public class PlayerState : NetworkBehaviour
         return _isCaught;
     }
 
+    /// <summary>
+    /// Call this method to get current cooldown state
+    /// </summary>
+    /// <returns></returns>
     public bool OnCooldown()
     {
         return _onCooldown;

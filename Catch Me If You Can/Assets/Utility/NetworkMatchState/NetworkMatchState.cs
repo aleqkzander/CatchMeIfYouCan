@@ -10,7 +10,7 @@ public class NetworkMatchState : NetworkBehaviour
 {
     [SerializeField] private List<PlayerState> _playerStates;
     [SerializeField] private bool _matchIsLife;
-    private float _defaultMatchTime = 60f;
+    private float _defaultMatchTime = 15f;
 
     [SerializeField] private float _playerOneTime;
     [SerializeField] private float _playerTwoTime;
@@ -147,6 +147,23 @@ public class NetworkMatchState : NetworkBehaviour
         {
             _matchIsLife = true;
             SetRandomPlayerStates();
+        }
+    }
+
+    /// <summary>
+    /// Add timeamount to player timer
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="timeamount"></param>
+    public void AddMatchTimeToPlayer(int index, float timeamount)
+    {
+        if (index == 0)
+        {
+            _playerOneTime += timeamount;
+        }
+        else
+        {
+            _playerTwoTime += timeamount;
         }
     }
 }

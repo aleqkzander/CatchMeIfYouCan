@@ -26,7 +26,7 @@ public class PlayerInterface : NetworkBehaviour
     }
 
     /// <summary>
-    /// Method will be called by PlayerState.cs
+    /// Method will be called and replicated by PlayerState.cs
     /// </summary>
     /// <param name="color"></param>
     public void SetStatusColor(Color color)
@@ -53,10 +53,35 @@ public class PlayerInterface : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Method will be called by PlayerBuff.cs
+    /// </summary>
+    /// <param name="color"></param>
+    public void SetFaceColor(Color color)
+    {
+        if (isServer)
+        {
+            SetFaceColorClientRpc(color);
+        }
+        else
+        {
+            if (isOwned)
+            {
+                SetFaceColorCommand(color);
+            }
+        }
+    }
+
     [Command]
     private void SetPlayerTimeCommand(float time)
     {
         SetPlayerTimeClientRpc(time);
+    }
+
+    [Command]
+    private void SetFaceColorCommand(Color color)
+    {
+        SetFaceColorClientRpc(color);
     }
 
     [ClientRpc]
@@ -65,11 +90,8 @@ public class PlayerInterface : NetworkBehaviour
         _playerTime.text = $"{time:00} seconds";
     }
 
-    /// <summary>
-    /// Method will be called by PlayerBuff.cs
-    /// </summary>
-    /// <param name="color"></param>
-    public void SetFaceColor(Color color)
+    [ClientRpc]
+    private void SetFaceColorClientRpc(Color color)
     {
         _faceImage.color = color;
     }
