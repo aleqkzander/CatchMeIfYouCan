@@ -1,7 +1,8 @@
+using Mirror;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class PlayerState : NetworkBehaviour
 {
     [SerializeField] private Light _stateLight;
     private bool _onCooldown;
@@ -54,6 +55,16 @@ public class PlayerState : MonoBehaviour
                 SetColor(StateColor.Seek);
                 break;
         }
+    }
+
+    private void HandleColorCommand()
+    {
+
+    }
+
+    private void HandleColorClientRpc()
+    {
+
     }
 
     private void SetColor(Color color)

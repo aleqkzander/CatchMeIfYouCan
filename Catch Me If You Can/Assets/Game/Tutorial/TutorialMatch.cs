@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class TutorialMatch : MonoBehaviour
 {
-    private PlayerState _playerState;
+    private PlayerStateTutorial _playerState;
     private float _playerTimer = 60f;
 
     private void Awake()
     {
-        _playerState = FindAnyObjectByType<PlayerState>();
+        _playerState = FindAnyObjectByType<PlayerStateTutorial>();
     }
 
     private void Update()

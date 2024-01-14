@@ -2211,7 +2211,7 @@ GameObject:
   - component: {fileID: 1907811287244230858}
   - component: {fileID: 2944070592209706242}
   - component: {fileID: 2827021318665905860}
-  - component: {fileID: 5522923936897083348}
+  - component: {fileID: 5409120353056244679}
   - component: {fileID: 8054557525947366879}
   - component: {fileID: 8879353915667561443}
   m_Layer: 8
@@ -2351,7 +2351,7 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   CameraSensitivity: 0.5
---- !u!114 &5522923936897083348
+--- !u!114 &5409120353056244679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4253384092308865254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b435526ce36084992b77af694eaf5e, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f69bc3a8107fd4a9f48bba70f8e284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _stateLight: {fileID: 1767600919385597491}
