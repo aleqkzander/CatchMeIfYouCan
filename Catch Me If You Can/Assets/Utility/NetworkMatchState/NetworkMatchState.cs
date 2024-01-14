@@ -65,13 +65,14 @@ public class NetworkMatchState : NetworkBehaviour
     {
         if (isServer)
         {
-            if (_playerOneTime <= 0)
+            if (_playerOneTime <= 0 || _playerTwoTime <= 0)
             {
                 _matchIsLife = false;
-            }
-            if (_playerTwoTime <= 0)
-            {
-                _matchIsLife = false;
+
+                foreach (var player in _playerStates)
+                {
+                    player.GetComponent<PlayerInterface>().ActivateMatchEnd();
+                }
             }
         }
     }

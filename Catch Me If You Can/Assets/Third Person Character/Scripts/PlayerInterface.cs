@@ -10,6 +10,7 @@ public class PlayerInterface : NetworkBehaviour
     [SerializeField] private RawImage _faceImage;
     [SerializeField] private TMP_Text _playerName;
     [SerializeField] private TMP_Text _playerTime;
+    [SerializeField] private GameObject _matchEnd;
 
     private void Start()
     {
@@ -85,6 +86,35 @@ public class PlayerInterface : NetworkBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Method will be called by NetworkMatchState.cs
+    /// </summary>
+    public void ActivateMatchEnd()
+    {
+        if (isServer)
+        {
+            ActivateMatchEndClientRpc();
+        }
+        else
+        {
+            ActivateMatchEndCommand();
+        }
+    }
+
+    [Command]
+    private void ActivateMatchEndCommand()
+    {
+        ActivateMatchEndClientRpc();
+    }
+
+    [ClientRpc]
+    private void ActivateMatchEndClientRpc()
+    {
+        DataManager.Instance.Movement.Disable();
+        _matchEnd.SetActive(true);
+        _matchEnd.GetComponent<PlayerMatchEnd>().SetWinnerText(_playerName.text);
     }
 
     [Command]
