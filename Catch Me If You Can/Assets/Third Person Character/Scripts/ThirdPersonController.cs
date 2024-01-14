@@ -82,6 +82,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private float _animationMotionTime;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -107,6 +108,8 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             DataManager.Instance.Movement.Enable();
+
+            _animationMotionTime = MoveSpeed;
         }
 
         private void Update()
@@ -221,6 +224,7 @@ namespace StarterAssets
             }
 
             _animator.SetFloat("Speed", move.magnitude);
+            _animator.SetFloat("SpeedMultiplier", targetSpeed/_animationMotionTime);
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
