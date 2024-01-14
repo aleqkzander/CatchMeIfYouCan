@@ -1,8 +1,9 @@
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerInterface : MonoBehaviour
+public class PlayerInterface : NetworkBehaviour
 {
     [SerializeField] private Image _statusImage;
     [SerializeField] private RawImage _faceImage;
@@ -20,6 +21,7 @@ public class PlayerInterface : MonoBehaviour
          * Player can setup his name by his own
          * Server later can access this by accessing the text of the _playerName text element
          */
+
         _playerName.text = name;
     }
 
@@ -37,6 +39,28 @@ public class PlayerInterface : MonoBehaviour
     /// </summary>
     /// <param name="time"></param>
     public void SetPlayerTime(float time)
+    {
+        if (isServer)
+        {
+            SetPlayerTimeClientRpc(time);
+        }
+        else
+        {
+            if (isOwned)
+            {
+                SetPlayerTimeCommand(time);
+            }
+        }
+    }
+
+    [Command]
+    private void SetPlayerTimeCommand(float time)
+    {
+        SetPlayerTimeClientRpc(time);
+    }
+
+    [ClientRpc]
+    private void SetPlayerTimeClientRpc(float time)
     {
         _playerTime.text = $"{time:00} seconds";
     }

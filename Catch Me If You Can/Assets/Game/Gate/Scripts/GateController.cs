@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 using Mirror;
 
@@ -28,16 +25,30 @@ public class GateController : NetworkBehaviour
 
     private IEnumerator OpenTheGate()
     {
-        DataManager.Instance.Movement.Disable();
-        _animation.Play("OpenGate");
+        DisableTriggers();
+        OpenGate();
+        
         yield return new WaitForSecondsRealtime(3f);
 
         if (isServer)
         {
             // Server check is required because GameObject gets destroyed when not the server.
-            FindAnyObjectByType<NetworkMatchState>().StartTheMatch();
+            FindObjectOfType<NetworkMatchState>().StartTheMatch();
         }
+    }
 
-        DataManager.Instance.Movement.Enable();
+    private void DisableTriggers()
+    {
+        Trigger[] triggers = GetComponentsInChildren<Trigger>();
+
+        foreach (Trigger trigger in triggers)
+        {
+            trigger.enabled = false;
+        }
+    }
+
+    private void OpenGate()
+    {
+        _animation.Play("OpenGate");
     }
 }

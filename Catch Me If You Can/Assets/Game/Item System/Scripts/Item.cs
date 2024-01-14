@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -11,7 +9,6 @@ public class Item : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         if (ScriptableItem == null) return;
         if (other.GetComponent<PlayerBuff>().IsOnCooldown()) return;
-
         ScriptableItem.Use(other.GetComponent<PlayerBuff>(), gameObject.GetComponent<Animation>());
     }
 }

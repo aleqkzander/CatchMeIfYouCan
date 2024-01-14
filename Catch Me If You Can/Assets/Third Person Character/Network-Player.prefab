@@ -1641,7 +1641,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b435526ce36084992b77af694eaf5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _stateLight: {fileID: 466380927596821594}
+  _onCooldown: 0
+  _isCaught: 0
+  _playerInterface: {fileID: 2701062931573673375}
 --- !u!114 &7469212194809629638
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,21 +14,18 @@ public class PlayerNetworkActivator : NetworkBehaviour
 
     private void Start()
     {
+        AddPlayerStateToNetworkMatch();
+
         if (isLocalPlayer)
         {
             _playerCameras.SetActive(true);
             _playerInterface.SetActive(true);
             _thirdPersonController.enabled = true;
-            AddPlayerStateToNetworkMatch();
         }
     }
 
     private void AddPlayerStateToNetworkMatch()
     {
-        /*
-         * Don't need to check for server because NetworkMatchState.cs is doing the check
-         */
-
         FindObjectOfType<NetworkMatchState>().AddPlayerState(GetComponent<PlayerState>());
     }
 }

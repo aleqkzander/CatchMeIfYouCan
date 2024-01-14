@@ -4,19 +4,18 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject TutorialSignCanvas;
     public GameObject TutorialTextCanvas;
-    private GameObject _player;
+    public GameObject Player;
     private TutorialManager _tutorialManager;
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
         _tutorialManager = FindAnyObjectByType<TutorialManager>();
     }
 
     private void Update()
     {
         transform.LookAt(
-            new Vector3(_player.transform.position.x, 0, _player.transform.position.z));
+            new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
     }
 
     private void OnTriggerEnter(Collider other)

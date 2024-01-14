@@ -103,10 +103,7 @@ public class NetworkMatchState : NetworkBehaviour
     /// <param name="state"></param>
     public void AddPlayerState(PlayerState state)
     {
-        if (isServer)
-        {
-            _playerStates.Add(state);
-        }
+        _playerStates.Add(state);
     }
 
     /// <summary>
@@ -136,7 +133,7 @@ public class NetworkMatchState : NetworkBehaviour
 
             foreach (var playerstate in _playerStates)
             {
-                //StartCoroutine(playerstate.HandleCooldown());
+                StartCoroutine(playerstate.HandleCooldown());
             }
         }
     }
