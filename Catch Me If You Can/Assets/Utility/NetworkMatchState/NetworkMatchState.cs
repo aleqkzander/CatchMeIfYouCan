@@ -9,8 +9,8 @@ using UnityEngine;
 public class NetworkMatchState : NetworkBehaviour
 {
     [SerializeField] private List<PlayerState> _playerStates;
+    [SerializeField] private float _defaultMatchTime = 60f;
     [SerializeField] private bool _matchIsLife;
-    private float _defaultMatchTime = 15f;
     private string _winnerPlayer;
 
     [SerializeField] private float _playerOneTime;
