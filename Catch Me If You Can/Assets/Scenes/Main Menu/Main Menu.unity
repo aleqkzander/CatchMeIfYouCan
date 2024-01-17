@@ -541,7 +541,9 @@ MonoBehaviour:
     Sprite: {fileID: 0}
   Levels:
   - Name: Playground
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 515630f5bec6ab240885589aaf5fd945, type: 3}
+  - Name: Platform City
+    Sprite: {fileID: 21300000, guid: b7c6be4ec491d17429a5deb875432220, type: 3}
   Movement:
     IsEnabled: 1
 --- !u!1 &963194225

@@ -5,7 +5,7 @@ using Mirror;
 public class GateController : NetworkBehaviour
 {
     [SerializeField] private Animation _animation;
-    private readonly int requiredCount = 2;
+    [SerializeField] private int requiredCount = 2;
     private int gateCounter;
 
     public void IncreaseGateCounter()
