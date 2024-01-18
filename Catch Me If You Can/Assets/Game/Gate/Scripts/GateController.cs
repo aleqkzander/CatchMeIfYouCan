@@ -5,8 +5,22 @@ using Mirror;
 public class GateController : NetworkBehaviour
 {
     [SerializeField] private Animation _animation;
-    [SerializeField] private int requiredCount = 2;
+    [SerializeField] private int requiredCount = 0;
     private int gateCounter;
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        requiredCount++;
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        requiredCount++;
+    }
 
     public void IncreaseGateCounter()
     {

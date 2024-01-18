@@ -55,7 +55,7 @@ public class NetworkMatchState : NetworkBehaviour
 
             _playerStates[0].gameObject.GetComponent<PlayerInterface>().SetPlayerTime(_playerOneTime);
 
-            if (_playerStates[1] != null)
+            if (_playerStates.Count > 1)
             {
                 _playerStates[1].gameObject.GetComponent<PlayerInterface>().SetPlayerTime(_playerTwoTime);
             }
@@ -99,13 +99,21 @@ public class NetworkMatchState : NetworkBehaviour
             if (randomNumber == 0)
             {
                 _playerStates[0].SetState(true);
-                _playerStates[1].SetState(false);
+
+                if (_playerStates.Count > 1)
+                {
+                    _playerStates[1].SetState(false);
+                }
             }
 
             if (randomNumber == 1)
             {
                 _playerStates[0].SetState(false);
-                _playerStates[1].SetState(true);
+
+                if (_playerStates.Count > 1)
+                {
+                    _playerStates[1].SetState(true);
+                }
             }
         }
     }

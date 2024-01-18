@@ -1458,6 +1458,7 @@ GameObject:
   - component: {fileID: 4194494040088931220}
   - component: {fileID: 5592626386245532606}
   - component: {fileID: 852233698631920040}
+  - component: {fileID: 7750694095277114039}
   m_Layer: 0
   m_Name: ScenePreview
   m_TagString: Untagged
@@ -1578,6 +1579,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!111 &7750694095277114039
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270850155135583397}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: fb05f21de4399d440a6c06fb35d19218, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fb05f21de4399d440a6c06fb35d19218, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &7479686965604945095
 GameObject:
   m_ObjectHideFlags: 0
