@@ -4,8 +4,8 @@ Players run and jump through dynamic environments while strategically using abil
 It's a fast-paced, adrenaline-pumping experience perfect for entertaining party sessions.
 
 # Networking system
-The system is built on Unity's Netcode for GameObjects. 
-Players have authority over managing their movement and animation. 
+The system is built on Mirror Networking.
+Players have authority over managing their movement and animation.
 The server is responsible for overseeing and managing the overall player state.
 
 # Requirements
