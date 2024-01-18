@@ -8,17 +8,36 @@ public class PlayCube : MonoBehaviour
     public Image ScenePreview;
     public TMP_Text SceneName;
     public TMP_InputField IpInput;
+    private int currentScene = 0;
 
     private void Start()
     {
         IpInput.text = DataManager.Instance.User.LastIp;
-        SelectCurrentLevel(0);
+        DisplayCurrentLevel(currentScene);
     }
 
-    private void SelectCurrentLevel(int index)
+    private void DisplayCurrentLevel(int index)
     {
         DataManager.Instance.CurrentLevel = DataManager.Instance.Levels[index];
         NetworkManager.singleton.onlineScene = DataManager.Instance.CurrentLevel.Name;
+        SceneName.text = DataManager.Instance.CurrentLevel.Name;
+        ScenePreview.sprite = DataManager.Instance.CurrentLevel.Sprite;
+    }
+
+    public void Cube_SelectNextScene()
+    {
+        int maxScenes = DataManager.Instance.Levels.Count;
+
+        if (currentScene < maxScenes - 1)
+        {
+            currentScene++;
+        }
+        else
+        {
+            currentScene = 0;
+        }
+
+        DisplayCurrentLevel(currentScene);
     }
 
     public void Cube_StartHost()
