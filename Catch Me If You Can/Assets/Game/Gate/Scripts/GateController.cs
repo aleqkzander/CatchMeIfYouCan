@@ -46,7 +46,7 @@ public class GateController : NetworkBehaviour
 
         if (isServer)
         {
-            // Server check is required because GameObject gets destroyed when not the server.
+            // Server check is required because NetworkMatchState gets destroyed when not the server.
             FindObjectOfType<NetworkMatchState>().StartTheMatch();
         }
     }
