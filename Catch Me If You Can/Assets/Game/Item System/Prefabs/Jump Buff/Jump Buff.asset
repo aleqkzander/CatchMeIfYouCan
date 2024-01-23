@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddddf5637e3e1840a5442ccd3e79904, type: 3}
   m_Name: Jump Buff
   m_EditorClassIdentifier: 
-  Multiplicator: 2
-  Duration: 3
-  Description: 
+  Multiplicator: 3
+  Duration: 6
+  Description: "\rProvide the player with a temporary jump boost lasting for a specified
+    duration."

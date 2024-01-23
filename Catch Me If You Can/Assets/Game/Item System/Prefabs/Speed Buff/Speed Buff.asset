@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cef5a1303501bc42b708e1ffd8e5323, type: 3}
   m_Name: Speed Buff
   m_EditorClassIdentifier: 
-  Multiplicator: 3
-  Duration: 2
-  Description: Multiplies player speed by 3 for a duration of 2 seconds
+  Multiplicator: 2
+  Duration: 4
+  Description: "\rAmplify the player's speed by a specified multiplier factor for
+    a designated duration."

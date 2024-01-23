@@ -5,27 +5,12 @@ using Mirror;
 public class GateController : NetworkBehaviour
 {
     [SerializeField] private Animation _animation;
-    [SerializeField] private int requiredCount = 0; // keep serialized for debugging. Remove serialized flag on production.
-    private int gateCounter;
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-
-        if (isServer)
-        {
-            requiredCount++;
-        }
-    }
+    [SerializeField] private int requiredCount = 2;
+    [SerializeField] private int gateCounter;
 
     public override void OnStopClient()
     {
         base.OnStopClient();
-
-        if (isServer)
-        {
-            requiredCount--;
-        }
     }
 
     public void IncreaseGateCounter()

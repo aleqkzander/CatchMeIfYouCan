@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3a6d0b5c9e80841859a793ec7a84b1, type: 3}
   m_Name: Invisibility Buff
   m_EditorClassIdentifier: 
-  Duration: 3
-  Description: 
+  Duration: 5
+  Description: "\rGrant the player temporary invisibility for a specified duration."
