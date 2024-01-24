@@ -6,6 +6,6 @@
 public class User
 {
     public string Name = "Unnamed";
-    public int Model = 0;
+    public int ModelIndex = 0;
     public string LastIp = "127.0.0.1"; 
 }

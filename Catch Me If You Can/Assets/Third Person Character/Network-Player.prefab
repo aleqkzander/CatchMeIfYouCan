@@ -1796,6 +1796,7 @@ GameObject:
   - component: {fileID: 5936341382395973250}
   - component: {fileID: 7469212194809629638}
   - component: {fileID: 2701062931573673375}
+  - component: {fileID: 3929287245974174068}
   m_Layer: 8
   m_Name: Network-Player
   m_TagString: Player
@@ -1976,6 +1977,7 @@ MonoBehaviour:
   _playerCameras: {fileID: 3482506064143798247}
   _playerInterface: {fileID: 8649774748913483584}
   _thirdPersonController: {fileID: 453830921303399524}
+  _playerMaterialLoaderNetworked: {fileID: 3929287245974174068}
 --- !u!114 &453830921303399524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2079,21 @@ MonoBehaviour:
   _playerName: {fileID: 7500089135960417160}
   _playerTime: {fileID: 4919804760343344155}
   _matchEnd: {fileID: 773067450331155493}
+--- !u!114 &3929287245974174068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284431621428448336}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1acd67e3005e90478dd6cb05ee58f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &4499840531510745152
 GameObject:
   m_ObjectHideFlags: 0
