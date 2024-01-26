@@ -1,6 +1,4 @@
-﻿using Mirror;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 /* 
  * Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -9,7 +7,7 @@ using UnityEngine;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-    public class ThirdPersonController : NetworkBehaviour
+    public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Sprint speed of the character in m/s")]
@@ -21,10 +19,6 @@ namespace StarterAssets
 
         [Tooltip("Acceleration and deceleration")]
         [HideInInspector] public float SpeedChangeRate = 10.0f;
-
-        [HideInInspector] public AudioClip LandingAudioClip;
-        public AudioClip[] FootstepAudioClips;
-        [HideInInspector][Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -84,7 +78,6 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-        private float _animationMotionTime;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -110,8 +103,6 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             DataManager.Instance.Movement.Enable();
-
-            _animationMotionTime = MoveSpeed;
         }
 
         private void Update()
@@ -226,7 +217,7 @@ namespace StarterAssets
             }
 
             _animator.SetFloat("Speed", move.magnitude);
-            _animator.SetFloat("SpeedMultiplier", targetSpeed / _animationMotionTime);
+            _animator.SetFloat("SpeedMultiplier", MoveSpeed/4.5f);
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
@@ -299,57 +290,6 @@ namespace StarterAssets
             Gizmos.DrawSphere(
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
-        }
-
-        private void OnFootstep(AnimationEvent animationEvent)
-        {
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                if (FootstepAudioClips.Length > 0)
-                {
-                    if (NetworkManager.singleton.mode == NetworkManagerMode.Offline)
-                    {
-                        var index = Random.Range(0, FootstepAudioClips.Length);
-                        AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-                        return;
-                    }
-
-                    if (isServer)
-                    {
-                        OnFootstepClientRpc(animationEvent);
-                    }
-                    else
-                    {
-                        if (isOwned)
-                        {
-                            OnFootstepCommand(animationEvent);
-                        }
-                    }
-                }
-            }
-        }
-
-        [Command]
-        private void OnFootstepCommand(AnimationEvent animationEvent)
-        {
-            OnFootstepClientRpc(animationEvent);
-        }
-
-        [ClientRpc]
-        private void OnFootstepClientRpc(AnimationEvent animationEvent)
-        {
-            var index = Random.Range(0, FootstepAudioClips.Length);
-            AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-        }
-
-
-        private void OnLand(AnimationEvent animationEvent)
-        {
-            // is not use due animation change
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
-            }
         }
     }
 }

@@ -187,4 +187,9 @@ public class NetworkMatchState : NetworkBehaviour
             _playerTwoTime += timeamount;
         }
     }
+
+    public int GetPlayerListCount()
+    {
+        return _playerStates.Count;
+    }
 }

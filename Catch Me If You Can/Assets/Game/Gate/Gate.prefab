@@ -535,7 +535,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _animation: {fileID: 4018971758227619006}
-  requiredCount: 0
+  _networkMatchState: {fileID: 0}
+  gateCounter: 0
 --- !u!1 &4067065388230801381
 GameObject:
   m_ObjectHideFlags: 0

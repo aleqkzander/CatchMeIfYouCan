@@ -1,8 +1,4 @@
 using Mirror;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
@@ -37,6 +33,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void SetPlayerModelClientRpc(int index)
     {
         GetComponentInChildren<SkinnedMeshRenderer>().material =
-    DataManager.Instance.Materials[index];
+            DataManager.Instance.Materials[index];
     }
 }

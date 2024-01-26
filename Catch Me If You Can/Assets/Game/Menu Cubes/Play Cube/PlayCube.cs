@@ -8,7 +8,7 @@ public class PlayCube : MonoBehaviour
     public Image ScenePreview;
     public TMP_Text SceneName;
     public TMP_InputField IpInput;
-    private int currentScene = 0;
+    private int currentScene = 1;
 
     private void Start()
     {
@@ -34,7 +34,8 @@ public class PlayCube : MonoBehaviour
         }
         else
         {
-            currentScene = 0;
+            // keep currentScene 1 to exclude the Playground scene
+            currentScene = 1;
         }
 
         DisplayCurrentLevel(currentScene);
