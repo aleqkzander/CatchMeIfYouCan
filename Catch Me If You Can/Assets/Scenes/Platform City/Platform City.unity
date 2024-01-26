@@ -10846,7 +10846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3398625468673797313, guid: 99e818762cb38804683e2b2bdb0141bf, type: 3}
       propertyPath: m_Name
-      value: Default Terrain
+      value: Platfrom City Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
