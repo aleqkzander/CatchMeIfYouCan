@@ -1976,6 +1976,7 @@ MonoBehaviour:
   syncInterval: 0
   _playerCameras: {fileID: 3482506064143798247}
   _playerInterface: {fileID: 8649774748913483584}
+  _characterController: {fileID: 6666334216610821658}
   _thirdPersonController: {fileID: 453830921303399524}
   _playerMaterialLoaderNetworked: {fileID: 3929287245974174068}
 --- !u!114 &453830921303399524
@@ -2022,6 +2023,7 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   CameraSensitivity: 0.5
+  PlayerNetworkActivator: {fileID: 6142619077140675512}
 --- !u!114 &5936341382395973250
 MonoBehaviour:
   m_ObjectHideFlags: 0
