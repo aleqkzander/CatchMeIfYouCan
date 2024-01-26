@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         PlayerActivator.SetActive(true);
+
+        // Increase movement speed when playing the tutorial scene
+        PlayerActivator.GetComponent<ThirdPersonController>().MoveSpeed = 10;
+
         RemoveAllSigns();
         ActivateSignForCurrentTutorial();
     }
