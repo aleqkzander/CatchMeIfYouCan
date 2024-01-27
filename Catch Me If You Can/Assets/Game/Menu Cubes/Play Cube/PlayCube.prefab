@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScenePreview: {fileID: 5592626386245532606}
+  HostGameTxt: {fileID: 3313761279939601989}
   SceneName: {fileID: 2421622898790177324}
   IpInput: {fileID: 5507428421400419050}
 --- !u!114 &9060016251864863847
@@ -394,7 +395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOST GAME
+  m_text: PLAY TUTORIAL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
