@@ -9,6 +9,7 @@ public class PlayerState : NetworkBehaviour
     [SerializeField] private Light _stateLight;
     [SerializeField] private bool _onCooldown;
     [SerializeField] private bool _isCaught;
+    [SerializeField] private AudioClip _changeStateClip;
 
     [Header("UI references")]
     [SerializeField] private PlayerInterface _playerInterface;
@@ -52,6 +53,7 @@ public class PlayerState : NetworkBehaviour
                     break;
             }
 
+            AudioSource.PlayClipAtPoint(_changeStateClip, gameObject.transform.position);
             return;
         }
         else
@@ -89,6 +91,8 @@ public class PlayerState : NetworkBehaviour
                 StateColor.Set(_stateLight, _playerInterface, StateColor.Seek);
                 break;
         }
+
+        AudioSource.PlayClipAtPoint(_changeStateClip, gameObject.transform.position);
     }
 
     /// <summary>

@@ -2028,6 +2028,7 @@ MonoBehaviour:
   _stateLight: {fileID: 466380927596821594}
   _onCooldown: 0
   _isCaught: 0
+  _changeStateClip: {fileID: 8300000, guid: ecd4f1a673c88a74fa45fc2236993d81, type: 3}
   _playerInterface: {fileID: 2701062931573673375}
 --- !u!114 &7469212194809629638
 MonoBehaviour:

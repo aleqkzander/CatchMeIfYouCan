@@ -64,7 +64,7 @@ namespace StarterAssets
         [HideInInspector] public bool LockCameraPosition = false;
 
         [Tooltip("Multiplication factor for the sensitivity")]
-        public float CameraSensitivity = 0.5f;
+        [HideInInspector] public float CameraSensitivity;
 
         #region Private variables
         // cinemachine
@@ -102,6 +102,7 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
+            CameraSensitivity = DataManager.Instance.Settings.CameraSensitivity;
             DataManager.Instance.Movement.Enable();
         }
 

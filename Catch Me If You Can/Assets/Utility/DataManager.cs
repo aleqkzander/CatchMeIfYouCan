@@ -6,6 +6,7 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance { get; private set; }
 
     public User User;
+    public Settings Settings;
     public Level CurrentLevel;
     public List<Level> Levels;
     public Movement Movement;
@@ -23,6 +24,7 @@ public class DataManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             LoadUserObject();
+            LoadSettingsObject();
         }
     }
 
@@ -32,19 +34,33 @@ public class DataManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(jsonUser))
         {
-            Debug.Log("No savedata was found.");
             return;
         }
         else
         {
-            Debug.Log("Savedata was loaded successfully: " + jsonUser);
             User = JsonUtility.FromJson<User>(jsonUser);
+        }
+    }
+
+    private void LoadSettingsObject()
+    {
+        string jsonSettings = PlayerPrefs.GetString("jsonsettings");
+
+        if (string.IsNullOrEmpty(jsonSettings))
+        {
+            return;
+        }
+        else
+        {
+            Settings = JsonUtility.FromJson<Settings>(jsonSettings);
         }
     }
 
     public void SaveGame()
     {
         string jsonData = JsonUtility.ToJson(User);
+        string jsonSettings = JsonUtility.ToJson(Settings);
         PlayerPrefs.SetString("jsonuser", jsonData);
+        PlayerPrefs.SetString("jsonsettings", jsonSettings);
     }
 }

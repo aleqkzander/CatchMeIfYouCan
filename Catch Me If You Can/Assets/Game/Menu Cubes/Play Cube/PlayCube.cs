@@ -14,7 +14,7 @@ public class PlayCube : MonoBehaviour
 
     private void Start()
     {
-        IpInput.text = DataManager.Instance.User.LastIp;
+        IpInput.text = DataManager.Instance.Settings.LastIp;
         DisplayCurrentLevel(currentScene);
     }
 
