@@ -20,10 +20,6 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         [HideInInspector] public float SpeedChangeRate = 10.0f;
 
-        [HideInInspector] public AudioClip LandingAudioClip;
-        [HideInInspector] public AudioClip[] FootstepAudioClips;
-        [HideInInspector] [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
-
         [Space(10)]
         [Tooltip("The height the player can jump")]
         [HideInInspector] public float JumpHeight = 1.2f;
@@ -82,7 +78,6 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-        private float _animationMotionTime;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -99,7 +94,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
 
@@ -108,8 +103,6 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             DataManager.Instance.Movement.Enable();
-
-            _animationMotionTime = MoveSpeed;
         }
 
         private void Update()
@@ -224,7 +217,7 @@ namespace StarterAssets
             }
 
             _animator.SetFloat("Speed", move.magnitude);
-            _animator.SetFloat("SpeedMultiplier", targetSpeed/_animationMotionTime);
+            _animator.SetFloat("SpeedMultiplier", MoveSpeed/4.5f);
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
@@ -297,26 +290,6 @@ namespace StarterAssets
             Gizmos.DrawSphere(
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
-        }
-
-        private void OnFootstep(AnimationEvent animationEvent)
-        {
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                if (FootstepAudioClips.Length > 0)
-                {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-                }
-            }
-        }
-
-        private void OnLand(AnimationEvent animationEvent)
-        {
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
-            }
         }
     }
 }

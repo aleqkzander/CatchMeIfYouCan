@@ -6,7 +6,7 @@ public class TextPrinter : MonoBehaviour
 {
     private TMP_Text _text;
     private string _fullText;
-    private float printDelay = 0.025f;
+    private float printDelay = 0.015f;
 
     private void Awake()
     {

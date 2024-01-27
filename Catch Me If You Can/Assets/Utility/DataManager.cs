@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     public Level CurrentLevel;
     public List<Level> Levels;
     public Movement Movement;
+    public List<Material> Materials;
 
     private void Awake() 
     {

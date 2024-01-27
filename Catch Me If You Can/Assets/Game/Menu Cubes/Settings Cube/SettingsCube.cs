@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class SettingsCube : MonoBehaviour
 {
+    public GameObject MainMenuPlayer;
     public TMP_InputField NicknameEntry;
+
+    private void Start()
+    {
+        MainMenuPlayer.SetActive(true);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

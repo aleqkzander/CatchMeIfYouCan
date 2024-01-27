@@ -1,45 +1,62 @@
 using System.Collections;
 using UnityEngine;
 using Mirror;
+using Unity.VisualScripting;
 
 public class GateController : NetworkBehaviour
 {
     [SerializeField] private Animation _animation;
-    [SerializeField] private int requiredCount = 2;
-    [SerializeField] private int gateCounter;
 
-    public override void OnStopClient()
+    [SyncVar(hook = nameof(OnRequiredCounterChanged))]
+    [SerializeField] private int _requiredCounter;
+
+    [SyncVar(hook = nameof(OnCounterChanged))]
+    [SerializeField] private int _gateCounter;
+
+    [SyncVar(hook = nameof(OnMatchStarted))]
+    [SerializeField] private bool _matchStarted = false;
+
+    private void OnRequiredCounterChanged(int oldValue, int newValue)
     {
-        base.OnStopClient();
+        _requiredCounter = newValue;
     }
 
-    public void IncreaseGateCounter()
+    private void OnCounterChanged(int oldValue, int newValue)
     {
-        gateCounter++;
+        _gateCounter = newValue;
+    }
 
-        if (gateCounter == requiredCount)
+    private void OnMatchStarted(bool oldValue, bool newValue)
+    {
+        _matchStarted = newValue;
+
+        if (newValue == true)
         {
             StartCoroutine(OpenTheGate());
         }
     }
 
-    public void DecreaseGateCounter()
+    public void IncreaseGateCounter()
     {
-        gateCounter--;
+        if (_matchStarted) return;
+
+        _gateCounter++;
+
+        if (_gateCounter == _requiredCounter)
+        {
+            _matchStarted = true;
+        }
     }
 
-    private IEnumerator OpenTheGate()
+    public void DecreaseGateCounter()
     {
-        DisableTriggers();
-        OpenGate();
-        
-        yield return new WaitForSecondsRealtime(3f);
+        if (_matchStarted) return;
+        _gateCounter--;
+    }
 
-        if (isServer)
-        {
-            // Server check is required because NetworkMatchState gets destroyed when not the server.
-            FindObjectOfType<NetworkMatchState>().StartTheMatch();
-        }
+    public void SetRequiredCounter(int amount)
+    {
+        _requiredCounter = amount;
     }
 
     private void DisableTriggers()
@@ -52,8 +69,18 @@ public class GateController : NetworkBehaviour
         }
     }
 
-    private void OpenGate()
+    private IEnumerator OpenTheGate()
     {
         _animation.Play("OpenGate");
+        DisableTriggers();
+
+        yield return new WaitForSecondsRealtime(3f);
+
+        if (isServer)
+        {
+            FindObjectOfType<NetworkMatchState>().StartTheMatch();
+        }
     }
+
+
 }
