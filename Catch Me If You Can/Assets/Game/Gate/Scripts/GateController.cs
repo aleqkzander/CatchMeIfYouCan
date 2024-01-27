@@ -6,13 +6,20 @@ using Unity.VisualScripting;
 public class GateController : NetworkBehaviour
 {
     [SerializeField] private Animation _animation;
-    [SerializeField] private int _requiredCounter = 2;
+
+    [SyncVar(hook = nameof(OnRequiredCounterChanged))]
+    [SerializeField] private int _requiredCounter;
 
     [SyncVar(hook = nameof(OnCounterChanged))]
     [SerializeField] private int _gateCounter;
 
     [SyncVar(hook = nameof(OnMatchStarted))]
     [SerializeField] private bool _matchStarted = false;
+
+    private void OnRequiredCounterChanged(int oldValue, int newValue)
+    {
+        _requiredCounter = newValue;
+    }
 
     private void OnCounterChanged(int oldValue, int newValue)
     {
@@ -47,6 +54,11 @@ public class GateController : NetworkBehaviour
         _gateCounter--;
     }
 
+    public void SetRequiredCounter(int amount)
+    {
+        _requiredCounter = amount;
+    }
+
     private void DisableTriggers()
     {
         Trigger[] triggers = GetComponentsInChildren<Trigger>();
@@ -69,4 +81,6 @@ public class GateController : NetworkBehaviour
             FindObjectOfType<NetworkMatchState>().StartTheMatch();
         }
     }
+
+
 }

@@ -125,6 +125,7 @@ public class NetworkMatchState : NetworkBehaviour
     public void AddPlayerState(PlayerState state)
     {
         _playerStates.Add(state);
+        FindObjectOfType<GateController>().SetRequiredCounter(_playerStates.Count);
     }
 
     /// <summary>
