@@ -32,6 +32,8 @@ public class NetworkMatchState : NetworkBehaviour
 
     private void Update()
     {
+        if (_playerStates.Count == 1) return;
+
         if (isServer)
         {
             if (!_matchIsLife) return;
