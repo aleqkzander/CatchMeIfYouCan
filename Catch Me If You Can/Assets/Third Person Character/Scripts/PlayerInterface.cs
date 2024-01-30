@@ -11,10 +11,24 @@ public class PlayerInterface : NetworkBehaviour
     [SerializeField] private TMP_Text _playerName;
     [SerializeField] private TMP_Text _playerTime;
     [SerializeField] private GameObject _matchEnd;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _restartSceneBtn;
 
     private void Start()
     {
+        if (isServer) _restartSceneBtn.SetActive(true);
         SetPlayerName(DataManager.Instance.User.Name);
+    }
+
+    private void Update()
+    {
+        if (!isLocalPlayer) return;
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (_pauseMenu.activeSelf) _pauseMenu.SetActive(false);
+            else _pauseMenu.SetActive(true);
+        }
     }
 
     private void SetPlayerName(string name)

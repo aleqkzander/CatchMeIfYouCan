@@ -1,11 +1,14 @@
 using Mirror;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMatchEnd : NetworkBehaviour
 {
     [SerializeField] private GameObject BackToCageBtn;
     [SerializeField] private TMP_Text _winnerText;
+    private bool _closeServer;
 
     private void Start()
     {
@@ -24,11 +27,25 @@ public class PlayerMatchEnd : NetworkBehaviour
     {
         if (isServer)
         {
-            NetworkManager.singleton.StopHost();
+            _closeServer = true;
+            NetworkManager.singleton.StopClient();
+
         }
         else
         {
             NetworkManager.singleton.StopClient();
+        }
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        if (isServer)
+        {
+            if (_closeServer)
+            {
+                NetworkManager.singleton.StopHost();
+            }
         }
     }
 

@@ -32,11 +32,10 @@ public class NetworkMatchState : NetworkBehaviour
 
     private void Update()
     {
-        if (_playerStates.Count == 1) return;
-
         if (isServer)
         {
             if (!_matchIsLife) return;
+            if (NetworkManager.singleton.numPlayers == 1) return;
             UpdatePlayerTimer();
             TrackMatchTimers();
         }
@@ -95,7 +94,6 @@ public class NetworkMatchState : NetworkBehaviour
     {
         if (isServer)
         {
-            // Generate a random integer (0 or 1)
             int randomNumber = Mathf.FloorToInt(Random.Range(0f, 2f));
 
             if (randomNumber == 0)
