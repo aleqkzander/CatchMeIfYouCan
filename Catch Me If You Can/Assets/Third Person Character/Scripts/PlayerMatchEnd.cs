@@ -28,18 +28,15 @@ public class PlayerMatchEnd : NetworkBehaviour
         if (isServer)
         {
             _closeServer = true;
-            NetworkManager.singleton.StopClient();
+        }
 
-        }
-        else
-        {
-            NetworkManager.singleton.StopClient();
-        }
+        NetworkManager.singleton.StopClient();
     }
 
     public override void OnStopClient()
     {
         base.OnStopClient();
+
         if (isServer)
         {
             if (_closeServer)
