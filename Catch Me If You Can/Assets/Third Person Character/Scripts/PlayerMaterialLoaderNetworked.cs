@@ -23,7 +23,14 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void SetPlayerModel(int index)
     {
-        _skinnedMeshRenderer.material = DataManager.Instance.Materials[index];
+        if (isServer)
+        {
+            SetPlayerModelClientRpc(index);
+        }
+        else if (isOwned)
+        {
+            SetPlayerModelCommand(index);
+        }
     }
 
 
@@ -40,6 +47,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerModelClientRpc(int index)
     {
-        _skinnedMeshRenderer.material = DataManager.Instance.Materials[index];
+        _skinnedMeshRenderer.material = 
+            DataManager.Instance.Materials[index];
     }
 }
