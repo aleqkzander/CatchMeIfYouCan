@@ -59,6 +59,9 @@ public class PlayCube : MonoBehaviour
     public void Cube_StartClient()
     {
         if (string.IsNullOrEmpty(IpInput.text)) return;
+        DataManager.Instance.Settings.LastIp = IpInput.text;
+        DataManager.Instance.SaveGame();
+
         NetworkManager.singleton.networkAddress = IpInput.text;
         NetworkManager.singleton.StartClient();
     }

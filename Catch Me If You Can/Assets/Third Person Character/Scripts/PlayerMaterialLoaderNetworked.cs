@@ -3,23 +3,39 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    private void Start()
+    [SerializeField] [SyncVar] private int _materalId;
+    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+
+    public override void OnStartClient()
     {
-        SetPlayerModel(DataManager.Instance.User.ModelIndex);
+        base.OnStartClient();
+
+        if (isLocalPlayer)
+        {
+            _materalId = DataManager.Instance.User.ModelIndex;
+        }
+
+        PlayerMaterialLoaderNetworked[] playerMaterialLoadersNetworked = FindObjectsOfType<PlayerMaterialLoaderNetworked>();
+        foreach (var loader in playerMaterialLoadersNetworked)
+        {
+            loader.SetPlayerModel(loader.GetModleId());
+        }
     }
 
-    private void SetPlayerModel(int index)
+    public int GetModleId()
+    {
+        return _materalId;
+    }
+
+    public void SetPlayerModel(int index)
     {
         if (isServer)
         {
-            SetPlayerModelClientRpc(index);
+            SetPlayerModelClientRpc(_materalId);
         }
-        else
+        else if (isOwned)
         {
-            if (isOwned)
-            {
-                SetPlayerModelCommand(index);
-            }
+            SetPlayerModelCommand(_materalId);
         }
     }
 
@@ -32,7 +48,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerModelClientRpc(int index)
     {
-        GetComponentInChildren<SkinnedMeshRenderer>().material =
+        _skinnedMeshRenderer.material = 
             DataManager.Instance.Materials[index];
     }
 }
