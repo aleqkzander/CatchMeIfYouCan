@@ -19,7 +19,11 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void OnChangeModelId(int oldValue, int newValue)
     {
         _modelId = newValue;
-        SetPlayerModel(_modelId);
+
+        if (isOwned)
+        {
+            SetPlayerModelCommand(_modelId);
+        }
     }
 
     private void SetPlayerModel(int index)
