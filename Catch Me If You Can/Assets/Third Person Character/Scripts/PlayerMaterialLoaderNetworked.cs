@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-     [SerializeField] private int _modelId;
+    [SerializeField] [SyncVar(hook = nameof(OnModelIdChanged))] private int _modelId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-
-        if (isLocalPlayer)
-        {
-            _modelId = DataManager.Instance.User.ModelIndex;
-            SetPlayerModel(_modelId);
-        }
-    }
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        RpcSetHostPlayerModel(_modelId);
+
+        if (isLocalPlayer)
+        {
+            _modelId = DataManager.Instance.User.ModelIndex;
+        }
     }
 
+    private void OnModelIdChanged(int oldValue, int newValue)
+    {
+        SetPlayerModel(newValue);
+    }
 
     private void SetPlayerModel(int index)
     {
@@ -48,16 +45,5 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     {
         _skinnedMeshRenderer.material = 
             DataManager.Instance.Materials[index];
-    }
-
-    [ClientRpc]
-    private void RpcSetHostPlayerModel(int index)
-    {
-        // Synchronize host player's material with new clients
-        if (!isLocalPlayer && isServer)
-        {
-            _skinnedMeshRenderer.material = 
-                DataManager.Instance.Materials[index];
-        }
     }
 }
