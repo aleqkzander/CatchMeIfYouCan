@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
@@ -13,8 +14,14 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         if (isLocalPlayer)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
-            SetPlayerModel(_modelId);
+            StartCoroutine(ApplyModelId(_modelId));
         }
+    }
+
+    private IEnumerator ApplyModelId(int index)
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        SetPlayerModel(index);
     }
 
     private void SetPlayerModel(int index)
