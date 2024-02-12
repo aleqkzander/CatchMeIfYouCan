@@ -1,16 +1,19 @@
 using Mirror;
-using Mono.CecilX.Cil;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SerializeField] private int _materalId;
+    [SerializeField] [SyncVar] private int _materalId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
     {
         base.OnStartClient();
-        _materalId = DataManager.Instance.User.ModelIndex;
+
+        if (isLocalPlayer)
+        {
+            _materalId = DataManager.Instance.User.ModelIndex;
+        }
 
         if (isServer)
         {
