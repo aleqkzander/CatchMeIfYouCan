@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SyncVar] [SerializeField] private int _modelId;
+    [SyncVar(hook = nameof(OnModelIdChanged))] [SerializeField] private int _modelId;
 
     public override void OnStartClient()
     {
@@ -13,8 +13,11 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         {
             _modelId = DataManager.Instance.User.ModelIndex;
         }
+    }
 
-        SetPlayerModel(_modelId);
+    private void OnModelIdChanged(int oldValue, int newValue)
+    {
+        SetPlayerModelClientRpc(newValue);
     }
 
     private void SetPlayerModel(int index)
