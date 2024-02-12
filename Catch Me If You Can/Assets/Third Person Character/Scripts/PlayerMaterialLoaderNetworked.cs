@@ -10,11 +10,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-
-        if (isLocalPlayer)
-        {
-            _materalId = DataManager.Instance.User.ModelIndex;
-        }
+        _materalId = DataManager.Instance.User.ModelIndex;
 
         if (isServer)
         {
