@@ -17,11 +17,15 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void OnChangeModelId(int oldValue, int newValue)
     {
         newValue = _modelId;
-        SetPlayerModel(newValue);
+        Invoke(nameof(SetPlayerModel), 0.5f);
     }
 
-    private void SetPlayerModel(int index)
+
+
+    private void SetPlayerModel()
     {
+        int index = _modelId;
+
         if (isServer)
         {
             SetPlayerModelClientRpc(index);
