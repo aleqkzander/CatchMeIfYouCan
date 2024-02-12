@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(OnModelIdChanged))] [SerializeField] private int _modelId;
+    [SerializeField] private int _modelId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
@@ -13,12 +13,8 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         if (isLocalPlayer)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
+            SetPlayerModel(_modelId);
         }
-    }
-
-    private void OnModelIdChanged(int oldValue, int newValue)
-    {
-        SetPlayerModel(newValue);
     }
 
     private void SetPlayerModel(int index)
@@ -32,11 +28,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
             SetPlayerModelCommand(index);
         }
     }
-
-
-
-
-
 
     [Command]
     private void SetPlayerModelCommand(int index)
