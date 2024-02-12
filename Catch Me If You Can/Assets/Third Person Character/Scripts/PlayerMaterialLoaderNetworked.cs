@@ -7,8 +7,10 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     [SerializeField] [SyncVar(hook = nameof(OnModelIdChanged))] private int _modelId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
-    private void Start()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
+
         if (isLocalPlayer)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
@@ -17,6 +19,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void OnModelIdChanged(int oldValue, int newValue)
     {
+        Debug.Log("Applie modelid: " + newValue);
         SetPlayerModel(newValue);
     }
 
