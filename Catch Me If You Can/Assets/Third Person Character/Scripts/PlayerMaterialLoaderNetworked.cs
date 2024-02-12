@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnModelIdChanged))] [SerializeField] private int _modelId;
+    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
     {
@@ -29,9 +30,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
             DataManager.Instance.Materials[index];
     }
 
-    private void GetModelIndex()
-    {
-    }
 
     [Command]
     private void SetPlayerModelCommand(int index)
@@ -42,7 +40,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerModelClientRpc(int index)
     {
-        GetComponentInChildren<SkinnedMeshRenderer>().material =
-            DataManager.Instance.Materials[index];
+        _skinnedMeshRenderer.material = DataManager.Instance.Materials[index];
     }
 }

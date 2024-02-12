@@ -2458,6 +2458,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _modelId: 0
+  _skinnedMeshRenderer: {fileID: 8940552360221738143}
 --- !u!114 &6839032349255396508
 MonoBehaviour:
   m_ObjectHideFlags: 0
