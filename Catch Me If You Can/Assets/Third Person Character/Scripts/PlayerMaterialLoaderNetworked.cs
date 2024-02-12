@@ -8,11 +8,15 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void Start()
     {
-        _modelId = DataManager.Instance.User.ModelIndex;
+        if (isLocalPlayer)
+        {
+            _modelId = DataManager.Instance.User.ModelIndex;
+        }
     }
 
     private void OnChangeModelId(int oldValue, int newValue)
     {
+        newValue = _modelId;
         SetPlayerModel(newValue);
     }
 
