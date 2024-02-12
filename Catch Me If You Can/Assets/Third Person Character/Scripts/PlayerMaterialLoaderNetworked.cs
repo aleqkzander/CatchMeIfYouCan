@@ -1,10 +1,8 @@
 using Mirror;
-using System.Collections;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SerializeField] [SyncVar(hook = nameof(OnModelIdChanged))] private int _modelId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
@@ -13,14 +11,8 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            _modelId = DataManager.Instance.User.ModelIndex;
+            SetPlayerModel(DataManager.Instance.User.ModelIndex);
         }
-    }
-
-    private void OnModelIdChanged(int oldValue, int newValue)
-    {
-        Debug.Log("Applie modelid: " + newValue);
-        SetPlayerModel(newValue);
     }
 
     private void SetPlayerModel(int index)
