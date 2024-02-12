@@ -7,11 +7,8 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void Start()
     {
-        if (isLocalPlayer)
-        {
-            _modelId = DataManager.Instance.User.ModelIndex;
-            Invoke(nameof(SetPlayerModel), 0.5f);
-        }
+        _modelId = DataManager.Instance.User.ModelIndex;
+        Invoke(nameof(SetPlayerModel), 0.5f);
     }
 
     private void SetPlayerModel()
