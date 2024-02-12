@@ -1,10 +1,10 @@
 using Mirror;
-using System.Collections.Generic;
+using Mono.CecilX.Cil;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SerializeField] private List<Material> _materials;
+    [SerializeField] private int _materalId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
@@ -13,19 +13,28 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            SetPlayerModel(DataManager.Instance.User.ModelIndex);
+            _materalId = DataManager.Instance.User.ModelIndex;
+        }
+
+        if (isServer)
+        {
+            PlayerMaterialLoaderNetworked[] playerMaterialLoadersNetworked = FindObjectsOfType<PlayerMaterialLoaderNetworked>();
+            foreach (var loader in playerMaterialLoadersNetworked)
+            {
+                loader.SetPlayerModel();
+            }
         }
     }
 
-    private void SetPlayerModel(int index)
+    public void SetPlayerModel()
     {
         if (isServer)
         {
-            SetPlayerModelClientRpc(index);
+            SetPlayerModelClientRpc(_materalId);
         }
         else if (isOwned)
         {
-            SetPlayerModelCommand(index);
+            SetPlayerModelCommand(_materalId);
         }
     }
 
@@ -39,6 +48,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void SetPlayerModelClientRpc(int index)
     {
         _skinnedMeshRenderer.material = 
-            _materials[index];
+            DataManager.Instance.Materials[index];
     }
 }
