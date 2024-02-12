@@ -33,13 +33,31 @@ public class PlayerInterface : NetworkBehaviour
 
     private void SetPlayerName(string name)
     {
-        /*
-         * Player can setup his name by his own
-         * Server later can access this by accessing the text of the _playerName text element
-         */
+        if (isServer)
+        {
+            SetPlayerNameClientRpc(name);
+        }
+        else
+        {
+            if (isOwned)
+            {
+                SetPlayerNameCommand(name);
+            }
+        }
+    }
 
+    [Command]
+    private void SetPlayerNameCommand(string name)
+    {
+        SetPlayerNameClientRpc(name);
+    }
+
+    [ClientRpc]
+    private void SetPlayerNameClientRpc(string name)
+    {
         _playerName.text = name;
     }
+
 
     /// <summary>
     /// Use method to get the playername
