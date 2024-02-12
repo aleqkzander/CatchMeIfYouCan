@@ -6,8 +6,9 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     [SyncVar(hook = nameof(OnChangeModelId))]
     [SerializeField] private int _modelId;
 
-    private void Start()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
         _modelId = DataManager.Instance.User.ModelIndex;
     }
 
