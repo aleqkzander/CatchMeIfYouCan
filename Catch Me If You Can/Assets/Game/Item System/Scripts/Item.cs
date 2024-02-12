@@ -9,6 +9,9 @@ public class Item : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         if (ScriptableItem == null) return;
         if (other.GetComponent<PlayerBuff>().IsOnCooldown()) return;
-        ScriptableItem.Use(other.GetComponent<PlayerBuff>(), gameObject.GetComponent<Animation>());
+
+        AudioSource.PlayClipAtPoint(ScriptableItem.Clip, gameObject.transform.position);
+
+        other.GetComponentInChildren<PlayerInventory>().AddItem(ScriptableItem);
     }
 }

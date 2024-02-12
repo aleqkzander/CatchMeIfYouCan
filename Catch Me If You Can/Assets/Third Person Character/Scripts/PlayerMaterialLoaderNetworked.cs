@@ -18,7 +18,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         PlayerMaterialLoaderNetworked[] playerMaterialLoadersNetworked = FindObjectsOfType<PlayerMaterialLoaderNetworked>();
         foreach (var loader in playerMaterialLoadersNetworked)
         {
-            loader.SetPlayerModel(loader.GetModleId());
+            loader.SetPlayerModel();
         }
     }
 
@@ -27,7 +27,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         return _materalId;
     }
 
-    public void SetPlayerModel(int index)
+    public void SetPlayerModel()
     {
         if (isServer)
         {
