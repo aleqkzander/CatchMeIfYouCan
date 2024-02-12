@@ -1,8 +1,10 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
+    [SerializeField] private List<Material> _materials;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
@@ -37,6 +39,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void SetPlayerModelClientRpc(int index)
     {
         _skinnedMeshRenderer.material = 
-            DataManager.Instance.Materials[index];
+            _materials[index];
     }
 }

@@ -2350,7 +2350,6 @@ MonoBehaviour:
   _playerCameras: {fileID: 3482506064143798247}
   _playerInterface: {fileID: 8649774748913483584}
   _thirdPersonController: {fileID: 453830921303399524}
-  _playerMaterialLoaderNetworked: {fileID: 3929287245974174068}
 --- !u!114 &453830921303399524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2457,7 +2456,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  _modelId: 0
+  _materials:
+  - {fileID: 9171952328373019990, guid: c796df251d62ac542b6d598dd82dc700, type: 3}
+  - {fileID: 2100000, guid: d165cb04944d5ea4ebf7c09fd1dce3be, type: 2}
+  - {fileID: 2100000, guid: 77fc7a2e48e653e4ca45c4e701c5ac2e, type: 2}
+  - {fileID: 2100000, guid: 690d3da862e181a4ebec246fa782fabb, type: 2}
+  - {fileID: 2100000, guid: ee08b36b454141e4b9d23833bb37436e, type: 2}
   _skinnedMeshRenderer: {fileID: 8940552360221738143}
 --- !u!114 &6839032349255396508
 MonoBehaviour:
