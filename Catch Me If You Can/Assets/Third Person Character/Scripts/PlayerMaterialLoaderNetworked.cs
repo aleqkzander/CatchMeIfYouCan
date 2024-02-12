@@ -9,20 +9,14 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-
-        if (isLocalPlayer)
-        {
-            _modelId = DataManager.Instance.User.ModelIndex;
-        }
+        _modelId = DataManager.Instance.User.ModelIndex;
     }
 
     private void OnChangeModelId(int oldValue, int newValue)
     {
-        _modelId = newValue;
-
         if (isOwned)
         {
-            SetPlayerModelCommand(_modelId);
+            SetPlayerModelCommand(newValue);
         }
     }
 

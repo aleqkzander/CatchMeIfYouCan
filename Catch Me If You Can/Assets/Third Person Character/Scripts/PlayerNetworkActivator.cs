@@ -22,7 +22,7 @@ public class PlayerNetworkActivator : NetworkBehaviour
             _playerCameras.SetActive(true);
             _playerInterface.SetActive(true);
             _thirdPersonController.enabled = true;
-            _playerMaterialLoaderNetworked.enabled = true;
+            //_playerMaterialLoaderNetworked.enabled = true;
         }
     }
 
