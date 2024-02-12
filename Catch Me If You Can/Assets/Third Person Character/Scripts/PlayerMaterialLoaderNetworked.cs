@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SerializeField] private int _modelId;
+     [SerializeField] private int _modelId;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     public override void OnStartClient()
@@ -14,15 +14,16 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         if (isLocalPlayer)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
-            StartCoroutine(ApplyModelId(_modelId));
+            SetPlayerModel(_modelId);
         }
     }
 
-    private IEnumerator ApplyModelId(int index)
+    public override void OnStartServer()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
-        SetPlayerModel(index);
+        base.OnStartServer();
+        RpcSetHostPlayerModel(_modelId);
     }
+
 
     private void SetPlayerModel(int index)
     {
@@ -47,5 +48,16 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     {
         _skinnedMeshRenderer.material = 
             DataManager.Instance.Materials[index];
+    }
+
+    [ClientRpc]
+    private void RpcSetHostPlayerModel(int index)
+    {
+        // Synchronize host player's material with new clients
+        if (!isLocalPlayer && isServer)
+        {
+            _skinnedMeshRenderer.material = 
+                DataManager.Instance.Materials[index];
+        }
     }
 }
