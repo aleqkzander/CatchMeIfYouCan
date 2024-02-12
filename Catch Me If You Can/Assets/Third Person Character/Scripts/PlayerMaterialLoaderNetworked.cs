@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(OnChangeModelId))]
     [SerializeField] private int _modelId;
 
     private void Start()
@@ -11,16 +10,9 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         if (isLocalPlayer)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
+            Invoke(nameof(SetPlayerModel), 0.5f);
         }
     }
-
-    private void OnChangeModelId(int oldValue, int newValue)
-    {
-        newValue = _modelId;
-        Invoke(nameof(SetPlayerModel), 0.5f);
-    }
-
-
 
     private void SetPlayerModel()
     {
