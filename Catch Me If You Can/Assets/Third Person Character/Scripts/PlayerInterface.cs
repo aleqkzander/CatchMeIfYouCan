@@ -122,7 +122,10 @@ public class PlayerInterface : NetworkBehaviour
         }
         else
         {
-            ActivateMatchEndCommand(winnerName);
+            if (isOwned)
+            {
+                ActivateMatchEndCommand(winnerName);
+            }
         }
     }
 

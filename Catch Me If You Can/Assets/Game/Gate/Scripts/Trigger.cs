@@ -1,6 +1,7 @@
 using UnityEngine;
+using Mirror;
 
-public class Trigger : MonoBehaviour
+public class Trigger : NetworkBehaviour
 {
     [SerializeField] private GateController gateController;
     private Animation _animation;
@@ -14,7 +15,18 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gateController.IncreaseGateCounter();
+            if (isServer)
+            {
+                EnterKnobClientRpc();
+            }
+            else
+            {
+                if (isOwned)
+                {
+                    EnterKnobCommand();
+                }
+            }
+
             _animation.Play("KnobDown");
         }
     }
@@ -23,8 +35,43 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gateController.DecreaseGateCounter();
+            if (isServer)
+            {
+                ExitKnobClientRpc();
+            }
+            else
+            {
+                if (isOwned)
+                {
+                    ExitKnobCommand();
+                }
+            }
+
             _animation.Play("KnobUp");
         }
+    }
+
+    [Command]
+    private void EnterKnobCommand()
+    {
+        EnterKnobClientRpc();
+    }
+
+    [ClientRpc]
+    private void EnterKnobClientRpc()
+    {
+        gateController.IncreaseGateCounter();
+    }
+
+    [Command]
+    private void ExitKnobCommand()
+    {
+        ExitKnobClientRpc();
+    }
+
+    [ClientRpc]
+    private void ExitKnobClientRpc()
+    {
+        gateController.DecreaseGateCounter();
     }
 }

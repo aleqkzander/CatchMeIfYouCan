@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using Mirror;
-using Unity.VisualScripting;
 
 public class GateController : NetworkBehaviour
 {
-    [SerializeField] private Animation _animation;
+    [SerializeField] private Animator _animator;
 
     [SyncVar(hook = nameof(OnRequiredCounterChanged))]
     [SerializeField] private int _requiredCounter;
@@ -13,7 +12,7 @@ public class GateController : NetworkBehaviour
     [SyncVar(hook = nameof(OnCounterChanged))]
     [SerializeField] private int _gateCounter;
 
-    [SyncVar(hook = nameof(OnMatchStarted))]
+    [SyncVar(hook = nameof(OnMatchReady))] 
     [SerializeField] private bool _matchStarted = false;
 
     private void OnRequiredCounterChanged(int oldValue, int newValue)
@@ -24,28 +23,24 @@ public class GateController : NetworkBehaviour
     private void OnCounterChanged(int oldValue, int newValue)
     {
         _gateCounter = newValue;
+
+        if (newValue == _requiredCounter)
+        {
+            _matchStarted = true;
+            _animator.Play("GateOpen");
+            StartCoroutine(StartMatch());
+        }
     }
 
-    private void OnMatchStarted(bool oldValue, bool newValue)
+    private void OnMatchReady(bool oldValue, bool newValue)
     {
         _matchStarted = newValue;
-
-        if (newValue == true)
-        {
-            StartCoroutine(OpenTheGate());
-        }
     }
 
     public void IncreaseGateCounter()
     {
         if (_matchStarted) return;
-
         _gateCounter++;
-
-        if (_gateCounter == _requiredCounter)
-        {
-            _matchStarted = true;
-        }
     }
 
     public void DecreaseGateCounter()
@@ -69,9 +64,8 @@ public class GateController : NetworkBehaviour
         }
     }
 
-    private IEnumerator OpenTheGate()
+    private IEnumerator StartMatch()
     {
-        _animation.Play("OpenGate");
         DisableTriggers();
 
         yield return new WaitForSecondsRealtime(3f);
@@ -81,6 +75,4 @@ public class GateController : NetworkBehaviour
             FindObjectOfType<NetworkMatchState>().StartTheMatch();
         }
     }
-
-
 }
