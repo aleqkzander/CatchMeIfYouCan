@@ -18,10 +18,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void OnModelIdChanged(int oldValue, int newValue)
     {
-        if (isServer)
-        {
-            SetPlayerModelClientRpc(newValue);
-        }
+        SetPlayerModelClientRpc(newValue);
     }
 
     private void SetPlayerModel(int index)
