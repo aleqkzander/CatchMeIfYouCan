@@ -8,11 +8,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-
-        if (isLocalPlayer)
-        {
-            _modelId = DataManager.Instance.User.ModelIndex;
-        }
+        _modelId = DataManager.Instance.User.ModelIndex;
     }
 
     private void OnModelIdChanged(int oldValue, int newValue)
@@ -22,18 +18,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void SetPlayerModel(int index)
     {
-        //if (isServer)
-        //{
-        //    SetPlayerModelClientRpc(index);
-        //}
-        //else
-        //{
-        //    if (isOwned)
-        //    {
-        //        SetPlayerModelCommand(index);
-        //    }
-        //}
-
         GetComponentInChildren<SkinnedMeshRenderer>().material =
             DataManager.Instance.Materials[index];
     }
