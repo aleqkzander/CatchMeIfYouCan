@@ -18,14 +18,17 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void OnModelIdChanged(int oldValue, int newValue)
     {
-        SetPlayerModelClientRpc(newValue);
+        SetPlayerModel(newValue);
     }
 
     private void SetPlayerModel(int index)
     {
-        GetComponentInChildren<SkinnedMeshRenderer>().material =
-            DataManager.Instance.Materials[index];
+        _skinnedMeshRenderer.material = DataManager.Instance.Materials[index];
     }
+
+
+
+
 
 
     [Command]
