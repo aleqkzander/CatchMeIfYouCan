@@ -1,11 +1,9 @@
-using JetBrains.Annotations;
 using Mirror;
 using UnityEngine;
 
 public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(OnChangeModelId))]
-    [SerializeField] private int _modelId;
+    [SyncVar] [SerializeField] private int _modelId;
 
     public override void OnStartClient()
     {
@@ -13,14 +11,7 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
         if (isOwned)
         {
             _modelId = DataManager.Instance.User.ModelIndex;
-        }
-    }
-
-    private void OnChangeModelId(int oldValue, int newValue)
-    {
-        if (isOwned)
-        {
-            SetPlayerModelCommand(newValue);
+            SetPlayerModel(_modelId);
         }
     }
 
