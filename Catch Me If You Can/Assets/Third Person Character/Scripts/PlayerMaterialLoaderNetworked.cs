@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Mirror;
 using UnityEngine;
 
@@ -9,7 +10,10 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        _modelId = DataManager.Instance.User.ModelIndex;
+        if (isOwned)
+        {
+            _modelId = DataManager.Instance.User.ModelIndex;
+        }
     }
 
     private void OnChangeModelId(int oldValue, int newValue)
