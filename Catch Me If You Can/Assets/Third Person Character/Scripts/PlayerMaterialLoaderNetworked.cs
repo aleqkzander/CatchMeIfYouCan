@@ -17,22 +17,25 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
 
     private void OnModelIdChanged(int oldValue, int newValue)
     {
-        SetPlayerModelClientRpc(newValue);
+        SetPlayerModel(newValue);
     }
 
     private void SetPlayerModel(int index)
     {
-        if (isServer)
-        {
-            SetPlayerModelClientRpc(index);
-        }
-        else
-        {
-            if (isOwned)
-            {
-                SetPlayerModelCommand(index);
-            }
-        }
+        //if (isServer)
+        //{
+        //    SetPlayerModelClientRpc(index);
+        //}
+        //else
+        //{
+        //    if (isOwned)
+        //    {
+        //        SetPlayerModelCommand(index);
+        //    }
+        //}
+
+        GetComponentInChildren<SkinnedMeshRenderer>().material =
+            DataManager.Instance.Materials[index];
     }
 
     [Command]
