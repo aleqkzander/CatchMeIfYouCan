@@ -9,7 +9,6 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
     private void Start()
     {
         _modelId = DataManager.Instance.User.ModelIndex;
-        Invoke(nameof(SetPlayerModel), 0.5f);
     }
 
     private void OnChangeModelId(int oldValue, int newValue)
