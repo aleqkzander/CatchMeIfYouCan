@@ -15,17 +15,19 @@ public class PlayerMaterialLoaderNetworked : NetworkBehaviour
             _materalId = DataManager.Instance.User.ModelIndex;
         }
 
-        if (isServer)
+        PlayerMaterialLoaderNetworked[] playerMaterialLoadersNetworked = FindObjectsOfType<PlayerMaterialLoaderNetworked>();
+        foreach (var loader in playerMaterialLoadersNetworked)
         {
-            PlayerMaterialLoaderNetworked[] playerMaterialLoadersNetworked = FindObjectsOfType<PlayerMaterialLoaderNetworked>();
-            foreach (var loader in playerMaterialLoadersNetworked)
-            {
-                loader.SetPlayerModel();
-            }
+            loader.SetPlayerModel(loader.GetModleId());
         }
     }
 
-    public void SetPlayerModel()
+    public int GetModleId()
+    {
+        return _materalId;
+    }
+
+    public void SetPlayerModel(int index)
     {
         if (isServer)
         {
