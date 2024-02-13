@@ -16,5 +16,6 @@ MonoBehaviour:
   Clip: {fileID: 8300000, guid: ee4778a8821bd224a850ccd23406b7eb, type: 3}
   Multiplicator: 3
   Duration: 6
+  RespawnTime: 3
   Description: "\rProvide the player with a temporary jump boost lasting for a specified
     duration."

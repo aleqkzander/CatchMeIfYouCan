@@ -6,6 +6,7 @@ public abstract class ScriptableItem : ScriptableObject
     public AudioClip Clip;
     public float Multiplicator;
     public float Duration;
+    public float RespawnTime;
     [Space(5)] [TextArea(3, 3)]
     public string Description;
 

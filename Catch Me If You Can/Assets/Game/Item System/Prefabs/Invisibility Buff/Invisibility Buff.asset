@@ -16,4 +16,5 @@ MonoBehaviour:
   Clip: {fileID: 8300000, guid: f9c9c160df794aa4d922559117f620b1, type: 3}
   Multiplicator: 0
   Duration: 5
+  RespawnTime: 3
   Description: "\rGrant the player temporary invisibility for a specified duration."
