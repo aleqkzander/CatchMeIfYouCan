@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cef5a1303501bc42b708e1ffd8e5323, type: 3}
   m_Name: Speed Buff
   m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: da1834ad352793e4f83fd5a80a7e21db, type: 3}
+  Clip: {fileID: 8300000, guid: cc3c107b21a2ae04e83de1844c7906c3, type: 3}
   Multiplicator: 2
   Duration: 4
-  PickupAudio: {fileID: 8300000, guid: cc3c107b21a2ae04e83de1844c7906c3, type: 3}
+  RespawnTime: 3
   Description: "\rAmplify the player's speed by a specified multiplier factor for
     a designated duration."

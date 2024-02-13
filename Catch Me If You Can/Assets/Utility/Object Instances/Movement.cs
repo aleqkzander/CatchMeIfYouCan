@@ -8,12 +8,14 @@ public class Movement
     public void Enable()
     {
         IsEnabled = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Disable()
     {
         IsEnabled = false;
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 }

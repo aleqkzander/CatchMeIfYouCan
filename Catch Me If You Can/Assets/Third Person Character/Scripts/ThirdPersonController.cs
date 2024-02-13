@@ -11,7 +11,7 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Sprint speed of the character in m/s")]
-        [HideInInspector] public float MoveSpeed = 5f;
+        public float MoveSpeed = 7.50f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -29,7 +29,7 @@ namespace StarterAssets
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-        [HideInInspector] public float JumpTimeout = 0.50f;
+        public float JumpTimeout = 0.00f;
 
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         [HideInInspector] public float FallTimeout = 0.15f;

@@ -22,10 +22,14 @@ public class PlayerBuff : MonoBehaviour
     {
         _onCooldown = true;
         GetComponent<PlayerInterface>().SetFaceColor(Color.grey);
+
         yield return new WaitForSecondsRealtime(time);
+
         _onCooldown = false;
         GetComponent<PlayerInterface>().SetFaceColor(Color.white);
     }
+
+
 
     /// <summary>
     /// Use to activate speed buff
@@ -34,16 +38,13 @@ public class PlayerBuff : MonoBehaviour
     /// <param name="multiplicator"></param>
     /// <param name="abilityTime"></param>
     /// <param name="animation"></param>
-    public void ActivateSpeedBuff(float cooldown, float multiplicator, float abilityTime, Animation animation)
+    public void ActivateSpeedBuff(float cooldown, float multiplicator, float abilityTime)
     {
-        StartCoroutine(HandleSpeedBuff(cooldown,multiplicator, abilityTime, animation));
+        StartCoroutine(HandleSpeedBuff(cooldown,multiplicator, abilityTime));
     }
-
-    private IEnumerator HandleSpeedBuff(float cooldown, float multiplicator, float abilityTime, Animation animation)
+    private IEnumerator HandleSpeedBuff(float cooldown, float multiplicator, float abilityTime)
     {
         StartCoroutine(HandleCooldown(cooldown));
-
-        animation.Play("ItemShrink");
         float defaultSpeed = _thirdPersonController.MoveSpeed;
         float buffSpeed = defaultSpeed * multiplicator;
         _thirdPersonController.MoveSpeed = buffSpeed;
@@ -63,9 +64,9 @@ public class PlayerBuff : MonoBehaviour
             shoe.GetComponent<Animation>().Play("ShoeShrink");
             shoe.GetComponent<TrailRenderer>().enabled = false;
         }
-
-        animation.Play("ItemGrow");
     }
+
+
 
     /// <summary>
     /// Use to activate invisibility
@@ -73,23 +74,21 @@ public class PlayerBuff : MonoBehaviour
     /// <param name="cooldown"></param>
     /// <param name="abilityTime"></param>
     /// <param name="animation"></param>
-    public void ActivateInvisibilityBuff(float cooldown, float abilityTime, Animation animation)
+    public void ActivateInvisibilityBuff(float cooldown, float abilityTime)
     {
-        StartCoroutine(HandleInvisibilityBuff(cooldown, abilityTime, animation));
+        StartCoroutine(HandleInvisibilityBuff(cooldown, abilityTime));
     }
-
-    private IEnumerator HandleInvisibilityBuff(float cooldown, float abilityTime, Animation animation)
+    private IEnumerator HandleInvisibilityBuff(float cooldown, float abilityTime)
     {
         StartCoroutine(HandleCooldown(cooldown));
-
-        animation.Play("ItemShrink");
         _playerModelShrink.GetComponent<Animation>().Play("PlayerShrink");
 
         yield return new WaitForSecondsRealtime(abilityTime);
 
         _playerModelShrink.GetComponent<Animation>().Play("PlayerGrow");
-        animation.Play("ItemGrow");
     }
+
+
 
     /// <summary>
     /// Use to activate the jump buff
@@ -98,16 +97,13 @@ public class PlayerBuff : MonoBehaviour
     /// <param name="multiplicator"></param>
     /// <param name="abilityTime"></param>
     /// <param name="animation"></param>
-    public void ActivateJumpBuff(float cooldown, float multiplicator, float abilityTime, Animation animation)
+    public void ActivateJumpBuff(float cooldown, float multiplicator, float abilityTime)
     {
-        StartCoroutine(HandleJumpBuff(cooldown, multiplicator, abilityTime, animation));
+        StartCoroutine(HandleJumpBuff(cooldown, multiplicator, abilityTime));
     }
-
-    private IEnumerator HandleJumpBuff(float cooldown, float multiplicator, float abilityTime, Animation animation)
+    private IEnumerator HandleJumpBuff(float cooldown, float multiplicator, float abilityTime)
     {
         StartCoroutine(HandleCooldown(cooldown));
-
-        animation.Play("ItemShrink");
         float defaultJump = _thirdPersonController.JumpHeight;
         float buffJump = defaultJump * multiplicator;
         _thirdPersonController.JumpHeight = buffJump;
@@ -117,32 +113,5 @@ public class PlayerBuff : MonoBehaviour
 
         _thirdPersonController.JumpHeight = defaultJump;
         _angelWings.GetComponent<Animation>().Play("WingsShrink");
-        animation.Play("ItemGrow");
-    }
-
-    /// <summary>
-    /// Use to activate the timebuff - currently under development
-    /// </summary>
-    /// <param name="cooldown"></param>
-    /// <param name="value"></param>
-    /// <param name="abilityTime"></param>
-    /// <param name="animation"></param>
-    public void ActivateTimeBuff(float cooldown, float value, float abilityTime, Animation animation)
-    {
-        StartCoroutine(HandleTimeBuff(cooldown, value, abilityTime, animation));
-    }
-
-    private IEnumerator HandleTimeBuff(float cooldown, float value, float abilityTime, Animation animation)
-    {
-        StartCoroutine(HandleCooldown(cooldown));
-
-        animation.Play("ItemShrink");
-
-        // add time value to player
-        
-
-        yield return new WaitForSecondsRealtime(abilityTime);
-
-        animation.Play("ItemGrow");
     }
 }

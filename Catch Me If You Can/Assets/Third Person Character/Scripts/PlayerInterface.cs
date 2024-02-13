@@ -85,7 +85,7 @@ public class PlayerInterface : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            _playerTime.text = $"{time:00} seconds";
+            _playerTime.text = $"{time:00}";
         }
         else
         {
@@ -176,7 +176,7 @@ public class PlayerInterface : NetworkBehaviour
     [ClientRpc]
     private void SetPlayerTimeClientRpc(float time)
     {
-        _playerTime.text = $"{time:00} seconds";
+        _playerTime.text = $"{time:00}";
     }
 
     [ClientRpc]

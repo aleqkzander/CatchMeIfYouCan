@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3a6d0b5c9e80841859a793ec7a84b1, type: 3}
   m_Name: Invisibility Buff
   m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: aec4951de8aa02e428f8048ecb7939ca, type: 3}
+  Clip: {fileID: 8300000, guid: f9c9c160df794aa4d922559117f620b1, type: 3}
+  Multiplicator: 0
   Duration: 5
-  PickupAudio: {fileID: 8300000, guid: f9c9c160df794aa4d922559117f620b1, type: 3}
+  RespawnTime: 3
   Description: "\rGrant the player temporary invisibility for a specified duration."
