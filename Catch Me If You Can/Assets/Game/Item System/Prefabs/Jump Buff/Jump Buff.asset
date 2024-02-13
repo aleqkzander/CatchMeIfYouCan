@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddddf5637e3e1840a5442ccd3e79904, type: 3}
   m_Name: Jump Buff
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: c0308cfc323f41b4294dd26058da151f, type: 3}
+  Sprite: {fileID: 21300000, guid: 891710bec382077428324b11ed90a13a, type: 3}
   Clip: {fileID: 8300000, guid: ee4778a8821bd224a850ccd23406b7eb, type: 3}
   Multiplicator: 3
   Duration: 6

@@ -20,7 +20,7 @@ public class ItemSlot : MonoBehaviour
             Icon.sprite = InventoryItem.Item.Sprite;
         }
 
-        Amount.text = "Amount: " + InventoryItem.Amount.ToString("00");
+        Amount.text = InventoryItem.Amount.ToString("00");
     }
 
     /// <summary>
@@ -37,6 +37,7 @@ public class ItemSlot : MonoBehaviour
         {
             InventoryItem.Item = null;
             Icon.sprite = null;
+            gameObject.SetActive(false);
         }
     }
 }

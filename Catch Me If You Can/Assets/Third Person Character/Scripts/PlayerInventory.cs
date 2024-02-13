@@ -13,6 +13,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (slot.InventoryItem.Item == null)
             {
+                slot.gameObject.SetActive(true);
                 slot.InventoryItem.Item = item;
                 slot.InventoryItem.Amount++;
                 slot.UpdateUI();

@@ -9,11 +9,13 @@ public class Movement
     {
         IsEnabled = true;
         Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     public void Disable()
     {
         IsEnabled = false;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
