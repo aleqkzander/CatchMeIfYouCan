@@ -35,7 +35,7 @@ public class ItemSlot : MonoBehaviour
 
         if (InventoryItem.Amount == 0)
         {
-            InventoryItem = null;
+            InventoryItem.Item = null;
             Icon.sprite = null;
         }
     }

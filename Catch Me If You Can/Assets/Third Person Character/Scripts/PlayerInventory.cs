@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddItem(ScriptableItem item)
     {
-        foreach (var slot in ItemSlots)
+        foreach (ItemSlot slot in ItemSlots)
         {
             if (slot.InventoryItem.Item == null)
             {
