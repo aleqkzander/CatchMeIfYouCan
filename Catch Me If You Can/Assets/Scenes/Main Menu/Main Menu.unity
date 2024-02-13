@@ -2220,6 +2220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayCube
       objectReference: {fileID: 0}
+    - target: {fileID: 650135326805457776, guid: 62b248000bb67f849813788f2003a634, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1045232444392195043, guid: 62b248000bb67f849813788f2003a634, type: 3}
       propertyPath: m_Sprite
       value: 
