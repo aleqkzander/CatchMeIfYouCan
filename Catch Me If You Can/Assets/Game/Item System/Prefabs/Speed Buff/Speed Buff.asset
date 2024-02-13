@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cef5a1303501bc42b708e1ffd8e5323, type: 3}
   m_Name: Speed Buff
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 869d8356ac9c78c4da0faebac37b32cb, type: 3}
   Clip: {fileID: 8300000, guid: cc3c107b21a2ae04e83de1844c7906c3, type: 3}
   Multiplicator: 2
   Duration: 4
