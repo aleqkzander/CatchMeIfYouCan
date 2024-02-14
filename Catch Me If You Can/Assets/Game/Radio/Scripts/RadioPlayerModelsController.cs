@@ -9,13 +9,16 @@ public class RadioPlayerModelsController : MonoBehaviour
     {
         if (ModelAnimations.Count == 0) return;
 
-        if (DataManager.Instance.Settings.PlayMusic)
+        if (DataManager.Instance != null)
         {
-            PlayDanceAnimation();
-        }
-        else
-        {
-            PlayIdleAnimation();
+            if (DataManager.Instance.Settings.PlayMusic)
+            {
+                PlayDanceAnimation();
+            }
+            else
+            {
+                PlayIdleAnimation();
+            }
         }
     }
 

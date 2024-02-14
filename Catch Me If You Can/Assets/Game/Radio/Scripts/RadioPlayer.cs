@@ -7,7 +7,12 @@ public class RadioPlayer : MonoBehaviour
     private void Start()
     {
         if (AudioSource.clip == null) return;
-        if (DataManager.Instance.Settings.PlayMusic == false) return;
+
+        if (DataManager.Instance != null)
+        {
+            if (DataManager.Instance.Settings.PlayMusic == false) return;
+        }
+
         AudioSource.Play();
     }
 }

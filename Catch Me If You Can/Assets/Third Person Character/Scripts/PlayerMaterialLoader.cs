@@ -6,7 +6,10 @@ public class PlayerMaterialLoader : MonoBehaviour
 {
     private void Start()
     {
-        SetPlayerModel(DataManager.Instance.User.ModelIndex);
+        if (DataManager.Instance != null)
+        {
+            SetPlayerModel(DataManager.Instance.User.ModelIndex);
+        }
     }
 
     public void SetPlayerModel(int index)

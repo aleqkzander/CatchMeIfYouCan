@@ -17,7 +17,11 @@ public class PlayerInterface : NetworkBehaviour
     private void Start()
     {
         if (isServer) _restartSceneBtn.SetActive(true);
-        SetPlayerName(DataManager.Instance.User.Name);
+
+        if (DataManager.Instance != null)
+        {
+            SetPlayerName(DataManager.Instance.User.Name);
+        }
     }
 
     private void Update()
@@ -26,8 +30,16 @@ public class PlayerInterface : NetworkBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (_pauseMenu.activeSelf) _pauseMenu.SetActive(false);
-            else _pauseMenu.SetActive(true);
+            if (_pauseMenu.activeSelf)
+            {
+                _pauseMenu.SetActive(false);
+                DataManager.Instance.Movement.Enable();
+            }
+            else 
+            { 
+                _pauseMenu.SetActive(true); 
+                DataManager.Instance.Movement.Disable();
+            }
         }
     }
 
