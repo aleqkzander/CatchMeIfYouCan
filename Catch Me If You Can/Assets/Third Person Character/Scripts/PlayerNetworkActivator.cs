@@ -26,6 +26,8 @@ public class PlayerNetworkActivator : NetworkBehaviour
 
     private void AddPlayerStateToNetworkMatch()
     {
-        FindObjectOfType<NetworkMatchState>().AddPlayerState(GetComponent<PlayerState>());
+        NetworkMatchState networkMatchState = FindObjectOfType<NetworkMatchState>();
+        if (networkMatchState == null) return;
+        networkMatchState.AddPlayerState(GetComponent<PlayerState>());
     }
 }
