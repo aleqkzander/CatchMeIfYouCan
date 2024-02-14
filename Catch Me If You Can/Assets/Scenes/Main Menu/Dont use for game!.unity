@@ -360,6 +360,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network-Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5538598990217173362, guid: 74f18548bde864c4ea114e38304d4e70, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000000010331861
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538598990217173362, guid: 74f18548bde864c4ea114e38304d4e70, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0006237047
+      objectReference: {fileID: 0}
+    - target: {fileID: 5538598990217173362, guid: 74f18548bde864c4ea114e38304d4e70, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.0740924e-10
+      objectReference: {fileID: 0}
     - target: {fileID: 6030676570082214245, guid: 74f18548bde864c4ea114e38304d4e70, type: 3}
       propertyPath: sceneId
       value: 1215656446
@@ -993,8 +1005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 482468780}
-    m_Mid: {fileID: 482468779}
+    m_Root: {fileID: 482468781}
+    m_Mid: {fileID: 482468780}
     m_Tip: {fileID: 482468778}
     m_Target: {fileID: 1623680590}
     m_Hint: {fileID: 0}
