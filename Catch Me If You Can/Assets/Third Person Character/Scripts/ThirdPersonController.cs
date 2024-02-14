@@ -102,16 +102,22 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
 
-            CameraSensitivity = DataManager.Instance.Settings.CameraSensitivity;
-            DataManager.Instance.Movement.Enable();
+            if (DataManager.Instance != null)
+            {
+                CameraSensitivity = DataManager.Instance.Settings.CameraSensitivity;
+                DataManager.Instance.Movement.Enable();
+            }
         }
 
         private void Update()
         {
-            if (DataManager.Instance.Movement.IsEnabled == false)
+            if (DataManager.Instance != null)
             {
-                _animator.SetFloat("Speed", 0);
-                return;
+                if (DataManager.Instance.Movement.IsEnabled == false)
+                {
+                    _animator.SetFloat("Speed", 0);
+                    return;
+                }
             }
 
             _hasAnimator = TryGetComponent(out _animator);
@@ -122,7 +128,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            if (DataManager.Instance.Movement.IsEnabled == false) return;
+            if (DataManager.Instance != null)
+            {
+                if (DataManager.Instance.Movement.IsEnabled == false) return;
+            }
 
             CameraRotation();
         }

@@ -12,7 +12,10 @@ public class RadioSwitch : MonoBehaviour
 
     private void Start()
     {
-        PlayRadio(DataManager.Instance.Settings.PlayMusic);
+        if (DataManager.Instance != null)
+        {
+            PlayRadio(DataManager.Instance.Settings.PlayMusic);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

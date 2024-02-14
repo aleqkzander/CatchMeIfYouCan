@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial/Tutorial.unity
     guid: 9cbd47fd4c939654980fa5a45473564b
   - enabled: 1
-    path: Assets/Scenes/Playground/Playground.unity
-    guid: fa2f85f3fa54e5e42970350563a0d522
-  - enabled: 1
     path: Assets/Scenes/Platform City/Platform City.unity
     guid: c3c03e2049a0062469f1a28f2e40a211
   m_configObjects: {}
