@@ -14,6 +14,9 @@ public class PlayerState : NetworkBehaviour
     [Header("UI references")]
     [SerializeField] private PlayerInterface _playerInterface;
 
+    [Header("Hand IK annimator")]
+    [SerializeField] private Animator _handIKAnimator;
+
     private void Start()
     {
         StateColor.Set(_stateLight, _playerInterface, StateColor.Neutral);
@@ -26,6 +29,8 @@ public class PlayerState : NetworkBehaviour
     {
         if (!other.CompareTag("Player") || _onCooldown)
             return;
+
+        StartCoroutine(HandleTick());
 
         if (isServer)
         {
@@ -132,5 +137,17 @@ public class PlayerState : NetworkBehaviour
         _onCooldown = true;
         yield return new WaitForSecondsRealtime(3);
         _onCooldown = false;
+    }
+
+    /// <summary>
+    /// Call this method to handle the ticking hand
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator HandleTick()
+    {
+        _handIKAnimator.enabled = true;
+        _handIKAnimator.SetTrigger("Tick");
+        yield return new WaitForSecondsRealtime(1);
+        _handIKAnimator.enabled = false;
     }
 }
