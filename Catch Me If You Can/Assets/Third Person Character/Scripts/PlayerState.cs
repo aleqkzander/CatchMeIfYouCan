@@ -27,8 +27,7 @@ public class PlayerState : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") || _onCooldown)
-            return;
+        if (!other.CompareTag("Player") || _onCooldown) return;
 
         if (isServer)
         {
@@ -150,7 +149,7 @@ public class PlayerState : NetworkBehaviour
 
         _handIKAnimator.enabled = true;
         _handIKAnimator.SetTrigger("Tick");
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(_handIKAnimator.GetCurrentAnimatorClipInfo(0).Length);
         _handIKAnimator.enabled = false;
     }
 }

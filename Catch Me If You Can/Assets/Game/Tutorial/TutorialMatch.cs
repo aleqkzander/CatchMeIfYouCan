@@ -24,16 +24,15 @@ public class TutorialMatch : MonoBehaviour
     {
         if (PlayerState.OnCooldown()) return;
 
-
+        StartCoroutine(PlayerState.HandleTick());
         if (PlayerState.IsCaught())
         {
             PlayerState.SetState(false);
-            StartCoroutine(PlayerState.HandleCooldown());
         }
         else 
         {
             PlayerState.SetState(true);
-            StartCoroutine(PlayerState.HandleCooldown());
         }
+        StartCoroutine(PlayerState.HandleCooldown());
     }
 }

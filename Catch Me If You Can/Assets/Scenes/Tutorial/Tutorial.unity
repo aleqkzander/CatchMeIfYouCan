@@ -12919,6 +12919,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 4126143116229264384}
+    - target: {fileID: 3046033222415683346, guid: 24428824f64af50429689af5285100a0, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3323232144961176709, guid: 24428824f64af50429689af5285100a0, type: 3}
       propertyPath: m_fontColor.b
       value: 0
@@ -13005,7 +13009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8562573591103635808, guid: 24428824f64af50429689af5285100a0, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: TutorialObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
