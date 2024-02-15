@@ -30,8 +30,6 @@ public class PlayerState : NetworkBehaviour
         if (!other.CompareTag("Player") || _onCooldown)
             return;
 
-        StartCoroutine(HandleTick());
-
         if (isServer)
         {
             // Keep the is server check here to prevent any calls to the NetworkMatchState when not the client
@@ -90,6 +88,7 @@ public class PlayerState : NetworkBehaviour
         {
             case false:
                 StateColor.Set(_stateLight, _playerInterface, StateColor.Hide);
+                StartCoroutine(HandleTick()); // also handle the ticking here
                 break;
 
             case true:
@@ -145,6 +144,10 @@ public class PlayerState : NetworkBehaviour
     /// <returns></returns>
     public IEnumerator HandleTick()
     {
+        /*
+         * control the ik animator from the rig
+         */
+
         _handIKAnimator.enabled = true;
         _handIKAnimator.SetTrigger("Tick");
         yield return new WaitForSecondsRealtime(1);
